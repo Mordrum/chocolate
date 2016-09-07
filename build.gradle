@@ -1,0 +1,125 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = 'sponge'
+            url = 'http://repo.spongepowered.org/maven'
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.1.3'
+    }
+}
+
+allprojects {
+    apply plugin: 'rebel'
+    apply plugin: 'com.github.johnrengelman.shadow'
+    apply plugin: 'net.minecraftforge.gradle.forge'
+    apply plugin: 'org.spongepowered.mixin'
+
+    jar.dependsOn(generateRebel)
+
+    archivesBaseName = project.projectDir.name
+    sourceCompatibility = targetCompatibility = "1.8"
+
+    minecraft {
+        version = "1.10.2-12.18.1.2073"
+        runDir = "run"
+        mappings = "snapshot_20160824"
+        makeObfSourceJar = false
+    }
+
+    runClient {
+        systemProperty "environment", "development"
+        jvmArgs = ["-javaagent:C:\\Users\\Jesse\\Development\\Tools\\jrebel\\jrebel.jar", "-Drebel.log=true", "-Drebel.plugins=C:\\Users\\Jesse\\Development\\Tools\\jr-minecraft-plugin.jar"]
+    }
+
+    sourceSets {
+        main {
+            refMap = "mixins." + project.projectDir.name + ".refmap.json"
+        }
+    }
+
+    def commonManifest = {
+        mainAttributes(
+                "FMLCorePlugin": "com.mordrum." + project.projectDir.name + ".CorePlugin",
+                "FMLCorePluginContainsFMLMod": true
+        )
+    }
+    jar.manifest commonManifest
+
+    // Create a JAR based on deobfuscated code
+    task deobfJar(type: Jar) {
+        manifest commonManifest
+        from sourceSets.main.output
+        classifier = 'dev'
+    }
+
+    // Reobfuscate to SRG mappings
+    reobf.jar.mappingType = 'SEARGE'
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+        maven {
+            name = 'sponge-public'
+            url = 'http://repo.spongepowered.org/maven/'
+        }
+    }
+
+    processResources {
+        // this will ensure that this task is redone when the versions change.
+        inputs.property "version", project.version
+        inputs.property "mcversion", project.minecraft.version
+
+        // replace stuff in mcmod.info, nothing else
+        from(sourceSets.main.resources.srcDirs) {
+            include 'mcmod.info'
+
+            // replace version and mcversion
+            expand 'version': project.version, 'mcversion': project.minecraft.version
+        }
+
+        // copy everything else, thats not the mcmod.info
+        from(sourceSets.main.resources.srcDirs) {
+            exclude 'mcmod.info'
+        }
+    }
+}
+
+subprojects {
+    buildDir = rootProject.buildDir
+
+    dependencies {
+        compile('org.spongepowered:mixin:0.5.11-SNAPSHOT') {
+            exclude module: 'launchwrapper'
+            exclude module: 'guava'
+        }
+    }
+}
+
+//sourceSets {
+//    main {
+//        refMap = "mixins.mcore.refmap.json"
+//    }
+//}
+//
+//def commonManifest = {
+//    mainAttributes(
+////            'MixinConfigs': 'mixins.mcore.json',
+////            'TweakOrder': 0,
+////            'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
+////            'TweakClass': 'com.mordrum.mcore.common.LaunchTweaker'
+//            "FMLCorePlugin": "com.mordrum.mcore.common.CorePlugin",
+//            "FMLCorePluginContainsFMLMod": true
+//    )
+//}
+//jar.manifest commonManifest

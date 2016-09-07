@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.5.7",
+  "package": "com.mordrum.mfish.common.mixins",
+  "refmap": "mixins.mfish.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinEntityFishHook"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

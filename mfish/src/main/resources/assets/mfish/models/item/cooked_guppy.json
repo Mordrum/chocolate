@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "mfish:items/fish_guppy_cooked"
+  }
+}

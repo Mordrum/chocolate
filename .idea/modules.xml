@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate_api.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate_api.iml" group="chocolate" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate_main.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate_main.iml" group="chocolate" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate_test.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate_test.iml" group="chocolate" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish.iml" group="mfish" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish_api.iml" group="mfish" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish_main.iml" group="mfish" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish_test.iml" group="mfish" />
+    </modules>
+  </component>
+</project>
