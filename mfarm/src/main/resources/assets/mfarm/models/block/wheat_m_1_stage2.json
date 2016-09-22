@@ -1,0 +1,6 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "mfarm:blocks/wheat_m_1_stage_2"
+    }
+}

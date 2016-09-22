@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.5.7",
+  "package": "com.mordrum.mcore.mixins",
+  "refmap": "mixins.mcore.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+//  "mixins": [
+//    "ChunkProviderSettingsFactoryMixin"
+//  ],
+  "client": [
+    "PlayerControllerMPMixin",
+    "RenderGlobalMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

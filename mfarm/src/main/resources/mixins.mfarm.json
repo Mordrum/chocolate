@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.5.7",
+  "package": "com.mordrum.mfarm.mixins",
+  "refmap": "mixins.mfarm.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "BlockCropsMixin",
+    "BlockBushMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

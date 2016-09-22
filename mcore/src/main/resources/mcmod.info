@@ -1,0 +1,21 @@
+[
+  {
+    "modid": "mcore",
+    "name": "mCore",
+    "description": "",
+    "version": "${version}",
+    "credits": "",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "SirSavary"
+    ],
+    "logoFile": "",
+    "parent": "",
+    "screenshots": [],
+    "dependencies": [
+      "MinecraftForge"
+    ]
+  }
+]

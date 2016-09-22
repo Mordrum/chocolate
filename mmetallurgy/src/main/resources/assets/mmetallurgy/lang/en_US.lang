@@ -1,0 +1,102 @@
+itemGroup.Metals=Metals
+itemGroup.Tools=Tools
+itemGroup.Ores=Ores
+
+tile.mmetallurgy.copper.ore.name=Copper Ore
+tile.mmetallurgy.tin.ore.name=Tin Ore
+tile.mmetallurgy.sulfur.ore.name=Sulfur Ore
+tile.mmetallurgy.saltpeter.ore.name=Saltpeter Ore
+tile.mmetallurgy.calitonium.ore.name=Calitonium Ore
+tile.mmetallurgy.grifonium.ore.name=Grifonium Ore
+
+tile.mmetallurgy.copper.ore.name=Copper Ore
+tile.mmetallurgy.copper.block.name=Copper Block
+tile.mmetallurgy.copper.brick.big.name=Small Copper Brick
+tile.mmetallurgy.copper.brick.small.name=Large Copper Brick
+item.mmetallurgy.copper.ingot.name=Copper Ingot
+item.mmetallurgy.copper.axe.name=Copper Axe
+item.mmetallurgy.copper.hoe.name=Copper Hoe
+item.mmetallurgy.copper.pick.name=Copper Pickaxe
+item.mmetallurgy.copper.shovel.name=Copper Shovel
+item.mmetallurgy.copper.sword.name=Copper Sword
+item.mmetallurgy.copper.head.name=Copper Helmet
+item.mmetallurgy.copper.chest.name=Copper Chestplate
+item.mmetallurgy.copper.legs.name=Copper Leggings
+item.mmetallurgy.copper.feet.name=Copper Boots
+
+tile.mmetallurgy.tin.ore.name=Tin Ore
+tile.mmetallurgy.tin.block.name=Tin Block
+tile.mmetallurgy.tin.brick.big.name=Big Tin Brick
+tile.mmetallurgy.tin.brick.small.name=Small Tin Brick
+item.mmetallurgy.tin.ingot.name=Tin Ingot
+
+tile.mmetallurgy.manganese.ore.name=Manganese Ore
+tile.mmetallurgy.manganese.block.name=Manganese Block
+tile.mmetallurgy.manganese.brick.big.name=Big Manganese Brick
+tile.mmetallurgy.manganese.brick.small.name=Small Manganese Brick
+item.mmetallurgy.manganese.ingot.name=Manganese Ingot
+
+tile.mmetallurgy.bronze.block.name=Bronze Block
+tile.mmetallurgy.bronze.brick.big.name=Big Bronze Brick
+tile.mmetallurgy.bronze.brick.small.name=Small Bronze Brick
+item.mmetallurgy.bronze.ingot.name=Bronze Ingot
+item.mmetallurgy.bronze.axe.name=Bronze Axe
+item.mmetallurgy.bronze.hoe.name=Bronze Hoe
+item.mmetallurgy.bronze.pick.name=Bronze Pickaxe
+item.mmetallurgy.bronze.shovel.name=Bronze Shovel
+item.mmetallurgy.bronze.sword.name=Bronze Sword
+item.mmetallurgy.bronze.head.name=Bronze Helmet
+item.mmetallurgy.bronze.chest.name=Bronze Chestplate
+item.mmetallurgy.bronze.legs.name=Bronze Leggings
+item.mmetallurgy.bronze.feet.name=Bronze Boots
+
+tile.mmetallurgy.hepatizon.block.name=Hepatizon Block
+tile.mmetallurgy.hepatizon.brick.big.name=Big Hepatizon Brick
+tile.mmetallurgy.hepatizon.brick.small.name=Small Hepatizon Brick
+item.mmetallurgy.hepatizon.ingot.name=Hepatizon Ingot
+item.mmetallurgy.hepatizon.axe.name=Hepatizon Axe
+item.mmetallurgy.hepatizon.hoe.name=Hepatizon Hoe
+item.mmetallurgy.hepatizon.pick.name=Hepatizon Pickaxe
+item.mmetallurgy.hepatizon.shovel.name=Hepatizon Shovel
+item.mmetallurgy.hepatizon.sword.name=Hepatizon Sword
+item.mmetallurgy.hepatizon.head.name=Hepatizon Helmet
+item.mmetallurgy.hepatizon.chest.name=Hepatizon Chestplate
+item.mmetallurgy.hepatizon.legs.name=Hepatizon Leggings
+item.mmetallurgy.hepatizon.feet.name=Hepatizon Boots
+
+tile.mmetallurgy.damascus_steel.block.name=Damascus Steel Block
+tile.mmetallurgy.damascus_steel.brick.big.name=Big Damascus Steel Brick
+tile.mmetallurgy.damascus_steel.brick.small.name=Small Damascus Steel Brick
+item.mmetallurgy.damascus_steel.ingot.name=Damascus Steel Ingot
+item.mmetallurgy.damascus_steel.axe.name=Damascus Steel Axe
+item.mmetallurgy.damascus_steel.hoe.name=Damascus Steel Hoe
+item.mmetallurgy.damascus_steel.pick.name=Damascus Steel Pickaxe
+item.mmetallurgy.damascus_steel.shovel.name=Damascus Steel Shovel
+item.mmetallurgy.damascus_steel.sword.name=Damascus Steel Sword
+item.mmetallurgy.damascus_steel.head.name=Damascus Steel Helmet
+item.mmetallurgy.damascus_steel.chest.name=Damascus Steel Chestplate
+item.mmetallurgy.damascus_steel.legs.name=Damascus Steel Leggings
+item.mmetallurgy.damascus_steel.feet.name=Damascus Steel Boots
+
+tile.mmetallurgy.steel.ore.name=Steel Ore
+tile.mmetallurgy.steel.block.name=Steel Block
+tile.mmetallurgy.steel.brick.big.name=Big Steel Brick
+tile.mmetallurgy.steel.brick.small.name=Small Steel Brick
+item.mmetallurgy.steel.ingot.name=Steel Ingot
+item.mmetallurgy.steel.axe.name=Steel Axe
+item.mmetallurgy.steel.hoe.name=Steel Hoe
+item.mmetallurgy.steel.pick.name=Steel Pickaxe
+item.mmetallurgy.steel.shovel.name=Steel Shovel
+item.mmetallurgy.steel.sword.name=Steel Sword
+item.mmetallurgy.steel.head.name=Steel Helmet
+item.mmetallurgy.steel.chest.name=Steel Chestplate
+item.mmetallurgy.steel.legs.name=Steel Leggings
+item.mmetallurgy.steel.feet.name=Steel Boots
+
+tile.mmetallurgy.sulfur.ore.name=Sulfur Ore
+tile.mmetallurgy.sulfur.block.name=Sulfur block
+item.mmetallurgy.sulfur.ingot.name=Sulfur
+
+tile.mmetallurgy.saltpeter.ore.name=Saltpeter Ore
+tile.mmetallurgy.saltpeter.block.name=Saltpeter Block
+item.mmetallurgy.saltpeter.ingot.name=Saltpeter

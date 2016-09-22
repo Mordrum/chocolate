@@ -1,2 +1,8 @@
 rootProject.name = 'chocolate'
 include 'mfish'
+include 'mclimate'
+include 'mfarm'
+include 'mcore'
+include 'mskill'
+include 'mmetallurgy'
+

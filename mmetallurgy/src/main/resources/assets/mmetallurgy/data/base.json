@@ -1,0 +1,95 @@
+[
+  {
+    "name": "Copper",
+    "type": "Ore",
+    "blockLevel": 1,
+    "armorStrength": 100,
+    "armorDurability": 100,
+    "toolStrength": 1,
+    "toolDurability": 100,
+    "toolSpeed": 5.0,
+    "toolDamage": 1.5,
+    "enchantability": "7",
+    "hasBlocks": true
+  },
+  {
+    "name": "Tin",
+    "type": "Catalyst",
+    "blockLevel": 1,
+    "hasBlocks": true
+  },
+  {
+    "name": "Manganese",
+    "type": "Catalyst",
+    "blockLevel": 2,
+    "hasBlocks": true
+  },
+  {
+    "name": "Bronze",
+    "type": "Alloy",
+    "blockLevel": 2,
+    "armorStrength": 250,
+    "armorDurability": 250,
+    "toolStrength": 1,
+    "toolDurability": 100,
+    "toolSpeed": 5.0,
+    "toolDamage": 1.5,
+    "enchantability": "7",
+    "hasBlocks": true,
+    "components": [
+      "mmetallurgy:copper_ingot",
+      "mmetallurgy:tin_ingot"
+    ]
+  },
+  {
+    "name": "Hepatizon",
+    "type": "Alloy",
+    "blockLevel": 2,
+    "armorStrength": 200,
+    "armorDurability": 200,
+    "toolStrength": 1,
+    "toolDurability": 100,
+    "toolSpeed": 5.0,
+    "toolDamage": 1.5,
+    "enchantability": "7",
+    "hasBlocks": true,
+    "components": [
+      "mmetallurgy:bronze_ingot",
+      "gold_ingot"
+    ]
+  },
+  {
+    "name": "Steel",
+    "type": "Alloy",
+    "blockLevel": 3,
+    "armorStrength": 600,
+    "armorDurability": 600,
+    "toolStrength": 1,
+    "toolDurability": 100,
+    "toolSpeed": 5.0,
+    "toolDamage": 1.5,
+    "enchantability": "7",
+    "hasBlocks": true,
+    "components": [
+      "iron_ingot",
+      "mmetallurgy:manganese_ingot"
+    ]
+  },
+  {
+    "name": "Damascus Steel",
+    "type": "Alloy",
+    "blockLevel": 4,
+    "armorStrength": 900,
+    "armorDurability": 900,
+    "toolStrength": 1,
+    "toolDurability": 100,
+    "toolSpeed": 5.0,
+    "toolDamage": 1.5,
+    "enchantability": "7",
+    "hasBlocks": true,
+    "components": [
+      "mmetallurgy:steel_ingot",
+      "leaves"
+    ]
+  }
+]

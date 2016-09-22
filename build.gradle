@@ -26,7 +26,6 @@ allprojects {
 
     jar.dependsOn(generateRebel)
 
-    archivesBaseName = project.projectDir.name
     sourceCompatibility = targetCompatibility = "1.8"
 
     minecraft {
@@ -38,19 +37,30 @@ allprojects {
 
     runClient {
         systemProperty "environment", "development"
-        jvmArgs = ["-javaagent:C:\\Users\\Jesse\\Development\\Tools\\jrebel\\jrebel.jar", "-Drebel.log=true", "-Drebel.plugins=C:\\Users\\Jesse\\Development\\Tools\\jr-minecraft-plugin.jar"]
+        systemProperty "mixin.debug", "true"
+        systemProperty "mixin.dumpTargetOnFailure", "true"
+        systemProperty "mixin.checks", "true"
+        jvmArgs = [
+                "-javaagent:C:\\Users\\Jesse\\Development\\Tools\\mixin-0.5.11-SNAPSHOT.jar",
+                "-javaagent:C:\\Users\\Jesse\\Development\\Tools\\jrebel\\jrebel.jar",
+                "-Drebel.log=true",
+                "-Drebel.plugins=C:\\Users\\Jesse\\Development\\Tools\\jr-minecraft-plugin.jar"
+        ]
     }
 
     sourceSets {
         main {
             refMap = "mixins." + project.projectDir.name + ".refmap.json"
+            output.resourcesDir = output.classesDir
         }
     }
 
     def commonManifest = {
         mainAttributes(
-                "FMLCorePlugin": "com.mordrum." + project.projectDir.name + ".CorePlugin",
-                "FMLCorePluginContainsFMLMod": true
+                "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+                "TweakOrder": 0,
+                "MixinConfigs": "mixins."  + project.projectDir.name +  ".json",
+                'ForceLoadAsMod': 'true'
         )
     }
     jar.manifest commonManifest
@@ -67,7 +77,7 @@ allprojects {
 
     repositories {
         flatDir {
-            dirs 'libs'
+            dirs("$rootProject.projectDir/libs")
         }
         maven {
             name = 'sponge-public'
@@ -96,9 +106,12 @@ allprojects {
 }
 
 subprojects {
-    buildDir = rootProject.buildDir
+    buildDir = rootProject.buildDir.absolutePath + "/" + project.name
+    rootProject.tasks.runClient.classpath += sourceSets.main.output
+    rootProject.tasks.runServer.classpath += sourceSets.main.output
 
     dependencies {
+        testCompile 'junit:junit:4.12'
         compile('org.spongepowered:mixin:0.5.11-SNAPSHOT') {
             exclude module: 'launchwrapper'
             exclude module: 'guava'
@@ -106,20 +119,6 @@ subprojects {
     }
 }
 
-//sourceSets {
-//    main {
-//        refMap = "mixins.mcore.refmap.json"
-//    }
-//}
-//
-//def commonManifest = {
-//    mainAttributes(
-////            'MixinConfigs': 'mixins.mcore.json',
-////            'TweakOrder': 0,
-////            'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
-////            'TweakClass': 'com.mordrum.mcore.common.LaunchTweaker'
-//            "FMLCorePlugin": "com.mordrum.mcore.common.CorePlugin",
-//            "FMLCorePluginContainsFMLMod": true
-//    )
-//}
-//jar.manifest commonManifest
+dependencies {
+    compile project(':mcore'), project(':mclimate'), project(':mfish'), project(':mfarm'), project(':mmetallurgy')
+}

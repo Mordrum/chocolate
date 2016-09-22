@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mmetallurgy",
+  "name": "mMetallurgy",
+  "description": "Custom ores, metals, tools, and weapons for Mordrum.com",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["SirSavary"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

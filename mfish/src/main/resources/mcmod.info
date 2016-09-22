@@ -1,0 +1,21 @@
+[
+  {
+    "modid": "mfish",
+    "name": "mFish",
+    "description": "",
+    "version": "1.0.0",
+    "credits": "",
+    "mcversion": "1.10.2",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "SirSavary"
+    ],
+    "logoFile": "",
+    "parent": "",
+    "screenshots": [],
+    "dependencies": [
+      "MinecraftForge"
+    ]
+  }
+]

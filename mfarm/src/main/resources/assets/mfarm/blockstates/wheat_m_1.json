@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "wheat_stage0" },
+        "age=1": { "model": "wheat_stage1" },
+        "age=2": { "model": "mfarm:wheat_m_1_stage2" },
+        "age=3": { "model": "mfarm:wheat_m_1_stage3" },
+        "age=4": { "model": "mfarm:wheat_m_1_stage4" },
+        "age=5": { "model": "mfarm:wheat_m_1_stage5" },
+        "age=6": { "model": "mfarm:wheat_m_1_stage6" },
+        "age=7": { "model": "mfarm:wheat_m_1_stage7" }
+    }
+}

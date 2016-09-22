@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Sulfur",
+    "type": "Drop",
+    "blockLevel": 1,
+    "hasBlocks": false
+  },
+  {
+    "name": "Saltpeter",
+    "type": "Drop",
+    "blockLevel": 1,
+    "hasBlocks": false
+  }
+]
