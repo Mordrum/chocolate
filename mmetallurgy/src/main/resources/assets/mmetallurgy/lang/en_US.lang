@@ -100,3 +100,6 @@ item.mmetallurgy.sulfur.ingot.name=Sulfur
 tile.mmetallurgy.saltpeter.ore.name=Saltpeter Ore
 tile.mmetallurgy.saltpeter.block.name=Saltpeter Block
 item.mmetallurgy.saltpeter.ingot.name=Saltpeter
+
+item.mmetallurgy.calitonium.ingot.name=Calitonium Ingot
+item.mmetallurgy.grifonium.ingot.name=Grifonium Ingot
