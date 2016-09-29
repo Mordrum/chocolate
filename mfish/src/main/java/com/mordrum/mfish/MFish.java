@@ -1,5 +1,6 @@
 package com.mordrum.mfish;
 
+import com.mordrum.mfish.common.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

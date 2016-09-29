@@ -23,6 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -56,10 +57,11 @@ public class CommonProxy {
 		// World generators
 		GameRegistry.registerWorldGenerator(new VeinGenerator(MMetallurgy.config.getConfigList("veins")), 1000);
 		GameRegistry.registerWorldGenerator(OreGenerator.getInstance(), 1500);
+		MinecraftForge.EVENT_BUS.register(new AchievementEventHandler());
 	}
 
 	public void init(FMLInitializationEvent event) {
-
+		Achievements.registerAchievements();
 	}
 
 	private void loadMetals() {
@@ -90,6 +92,7 @@ public class CommonProxy {
 								FurnaceRecipes.instance().addSmeltingRecipeForBlock(oreBlock, new ItemStack(ingot), 1.0f);
 							}
 						} else {
+							ingot.setAlloy(true);
 							alloyMap.put(ingot, metalConfiguration.get("components").getAsJsonArray());
 						}
 

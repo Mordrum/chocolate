@@ -1,3 +1,22 @@
+achievement.mfish.bigCatch=Big Catch
+achievement.mfish.bigCatch.desc=Catch a fish weighting 30lbs or more
+achievement.mfish.littleGuppy=Little Guppy
+achievement.mfish.littleGuppy.desc=Catch a baby fish
+achievement.mfish.theBigOne=The Big One
+achievement.mfish.theBigOne.desc=Catch a fish weighting 100lbs or more
+achievement.mfish.toFeedAFamily=To Feed a Family
+achievement.mfish.toFeedAFamily.desc=Catch a total of 100lbs of fish
+achievement.mfish.toFeedAVillage=To Feed a Village
+achievement.mfish.toFeedAVillage.desc=Catch a total of 1,000lbs of fish
+achievement.mfish.toFeedAnArmy=To Feed an Army
+achievement.mfish.toFeedAnArmy.desc=Catch a total of 10,000lbs of fish
+achievement.mfish.fishing101=Fishing 101
+achievement.mfish.fishing101.desc=Catch 3 unique types of fish
+achievement.mfish.angler=Angler
+achievement.mfish.angler.desc=Catch 10 unique types of fish
+achievement.mfish.fishologist=Fishologist
+achievement.mfish.fishologist.desc=Catch 30 unique types of fish
+
 item.mfish_fish_carp_raw.name=Raw Carp
 item.mfish_fish_trout_raw.name=Raw Trout
 item.mfish_fish_koi_raw.name=Raw Koi

@@ -1,6 +1,6 @@
 package com.mordrum.mfish.server;
 
-import com.mordrum.mfish.CommonProxy;
+import com.mordrum.mfish.common.CommonProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 

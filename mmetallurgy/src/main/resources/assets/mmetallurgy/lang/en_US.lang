@@ -103,3 +103,18 @@ item.mmetallurgy.saltpeter.ingot.name=Saltpeter
 
 item.mmetallurgy.calitonium.ingot.name=Calitonium Ingot
 item.mmetallurgy.grifonium.ingot.name=Grifonium Ingot
+
+achievement.mmetallurgy.strongerTogether=Stronger Together
+achievement.mmetallurgy.strongerTogether.desc=Forge an alloy.
+achievement.mmetallurgy.metalSmith=Metal Smith
+achievement.mmetallurgy.metalSmith.desc=Forge four different alloys.
+achievement.mmetallurgy.lostToTheAges=Lost to the Ages
+achievement.mmetallurgy.lostToTheAges.desc=Forge the forgotten alloy.
+achievement.mmetallurgy.adam=Adam
+achievement.mmetallurgy.adam.desc=???
+achievement.mmetallurgy.eve=Eve
+achievement.mmetallurgy.eve.desc=???
+achievement.mmetallurgy.newStyle=New Style
+achievement.mmetallurgy.newStyle.desc=Craft a piece of armor using the new metals.
+achievement.mmetallurgy.volatileRecipe=Volatile Recipe
+achievement.mmetallurgy.volatileRecipe.desc=Craft some gunpowder.

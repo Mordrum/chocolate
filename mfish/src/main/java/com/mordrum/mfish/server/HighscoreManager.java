@@ -15,12 +15,13 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 
-@SideOnly(Side.SERVER)
 class HighscoreManager {
     private static final StringBuilder sb = new StringBuilder();
     private static final DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
 
     static void checkHighscore(EntityPlayer player, Fish fish, double weight) {
+        if (player.getEntityWorld().isRemote) return;
+
         Unirest.post("http://api.mordrum.com/fishing")
                 .header("accept", "application/json")
                 .header("Content-Type", "application/json")

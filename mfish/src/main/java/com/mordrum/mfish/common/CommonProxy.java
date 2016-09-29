@@ -1,6 +1,8 @@
-package com.mordrum.mfish;
+package com.mordrum.mfish.common;
 
 import com.google.common.collect.Lists;
+import com.mordrum.mfish.MFish;
+import com.mordrum.mfish.common.Achievements;
 import com.mordrum.mfish.common.Fish;
 import com.mordrum.mfish.common.items.ItemFish;
 import com.typesafe.config.Config;
@@ -10,7 +12,14 @@ import com.typesafe.config.ConfigValueFactory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stats.Achievement;
+import net.minecraft.stats.AchievementList;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -51,6 +60,7 @@ public class CommonProxy {
         System.out.println("Init");
 
         loadFish();
+        Achievements.registerAchievements();
     }
 
     private void loadFish() {
