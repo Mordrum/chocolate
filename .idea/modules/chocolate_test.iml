@@ -11,7 +11,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/compileDummy.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/providedDummy.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -20,14 +20,15 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/providedDummy.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/compileDummy.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="chocolate_api" />
     <orderEntry type="module" module-name="chocolate_main" />
+    <orderEntry type="module" module-name="chocolate_api" />
+    <orderEntry type="library" name="Gradle: :ambience-1.0.5:" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -37,7 +38,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Gradle: :ambience-1.0.5:" level="project" />
     <orderEntry type="module" module-name="mcore_main" />
     <orderEntry type="module" module-name="mclimate_main" />
     <orderEntry type="module" module-name="mfish_main" />
