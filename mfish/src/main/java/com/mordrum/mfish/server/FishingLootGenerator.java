@@ -1,9 +1,8 @@
 package com.mordrum.mfish.server;
 
-import com.mordrum.mfish.common.CommonProxy;
 import com.mordrum.mfish.common.Achievements;
+import com.mordrum.mfish.common.CommonProxy;
 import com.mordrum.mfish.common.Fish;
-import com.mordrum.mfish.common.Stats;
 import com.mordrum.mfish.common.events.FishCaughtEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,9 +11,7 @@ import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatisticsManagerServer;
-import net.minecraft.util.IJsonSerializable;
 import net.minecraft.util.JsonSerializableSet;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
