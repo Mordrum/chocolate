@@ -14,17 +14,13 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
         classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
-        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.1.3'
     }
 }
 
 allprojects {
-    apply plugin: 'rebel'
     apply plugin: 'com.github.johnrengelman.shadow'
     apply plugin: 'net.minecraftforge.gradle.forge'
     apply plugin: 'org.spongepowered.mixin'
-
-    jar.dependsOn(generateRebel)
 
     sourceCompatibility = targetCompatibility = "1.8"
 
@@ -41,10 +37,7 @@ allprojects {
         systemProperty "mixin.dumpTargetOnFailure", "true"
         systemProperty "mixin.checks", "true"
         jvmArgs = [
-                "-javaagent:C:\\Users\\Jesse\\Development\\Tools\\mixin-0.5.11-SNAPSHOT.jar",
-                "-javaagent:C:\\Users\\Jesse\\Development\\Tools\\jrebel\\jrebel.jar",
-                "-Drebel.log=true",
-                "-Drebel.plugins=C:\\Users\\Jesse\\Development\\Tools\\jr-minecraft-plugin.jar"
+                "-javaagent:C:\\Users\\Jesse\\Development\\Tools\\mixin-0.5.11-SNAPSHOT.jar"
         ]
     }
 
@@ -58,7 +51,6 @@ allprojects {
     def commonManifest = {
         mainAttributes(
                 "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
-                "TweakOrder": 0,
                 "MixinConfigs": "mixins."  + project.projectDir.name +  ".json",
                 'ForceLoadAsMod': 'true'
         )
