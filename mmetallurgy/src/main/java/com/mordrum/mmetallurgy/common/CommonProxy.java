@@ -41,7 +41,7 @@ public class CommonProxy {
 	protected final List<Item> items;
 	private final Map<Ingot, JsonArray> alloyMap;
 
-	protected CommonProxy() {
+	public CommonProxy() {
 		armors = new ArrayList<>();
 		items = new ArrayList<>();
 		alloyMap = new HashMap<>();
