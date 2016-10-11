@@ -1,4 +1,4 @@
-package com.mordrum.mfarm.block;
+package com.mordrum.mfarm.common.block;
 
 import com.mordrum.mfarm.MFarm;
 import net.minecraft.block.BlockCrops;

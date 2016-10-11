@@ -1,11 +1,14 @@
 package com.mordrum.mfarm;
 
-import com.mordrum.mfarm.block.BlockHeirloomWheat;
-import com.mordrum.mfarm.item.ItemHeirloomWheat;
+import com.google.common.eventbus.Subscribe;
+import com.mordrum.mfarm.common.GeneListener;
+import com.mordrum.mfarm.common.GeneticsListener;
+import com.mordrum.mfarm.common.block.BlockHeirloomWheat;
+import com.mordrum.mfarm.events.EntityBreedEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -25,6 +28,8 @@ public class CommonProxy {
         itemBlock.setUnlocalizedName(MFarm.MOD_ID + "heirloom_wheat");
         itemBlock.setRegistryName(MFarm.MOD_ID, "heirloom_wheat_item");
         GameRegistry.register(itemBlock);
+        MinecraftForge.EVENT_BUS.register(new GeneticsListener());
+        MinecraftForge.EVENT_BUS.register(new GeneListener());
 
 //        ItemHeirloomWheat itemHeirloomWheat = new ItemHeirloomWheat();
 //        GameRegistry.register(itemHeirloomWheat);
@@ -34,5 +39,9 @@ public class CommonProxy {
 //            itemModelMesher.register(itemHeirloomWheat, 1, new ModelResourceLocation(MFarm.MOD_ID + ":wheat_m_1", "inventory"));
 
         }
+    }
+
+    @Subscribe
+    public void onBreed(EntityBreedEvent event) {
     }
 }
