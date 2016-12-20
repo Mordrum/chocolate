@@ -10,26 +10,17 @@ import net.minecraft.item.Item;
 import java.util.Random;
 
 public class SmallBrickBlock extends MalisisBlock {
-//    private final String name;
 
     public SmallBrickBlock(String metal) {
         super(Material.IRON);
-        this.name = MMetallurgy.MOD_ID + "." + metal + ".brick.small";
 
-        register();
-
+        this.setName(MMetallurgy.MOD_ID + "." + metal + ".brick.small");
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(MMetallurgy.bricksTab);
         this.setHarvestLevel("pickaxe", 1);
-        this.setUnlocalizedName(this.name);
         this.setHardness(1.0f); // Time to mine
         this.setResistance(4.0f); // Explosion resistance
         this.setTexture(MMetallurgy.MOD_ID + ":blocks/bricks/" + metal + "_brick small bricks");
-    }
-
-
-    public String getName() {
-        return name;
     }
 
     @Override

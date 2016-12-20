@@ -2,7 +2,6 @@ package com.mordrum.mmetallurgy.blocks;
 
 import com.mordrum.mmetallurgy.MMetallurgy;
 import net.malisis.core.block.MalisisBlock;
-import net.malisis.core.util.clientnotif.ClientNotification;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,20 +18,18 @@ public class OreBlock extends MalisisBlock {
 
 	public OreBlock(String name, int blockLevel) {
 		super(Material.ROCK);
-		//TODO use the MalisisBlock name field
-//		this.name = name + "_ore";
+
 		this.setName(name + "_ore");
 		this.maxQuantityDropped = 1;
-
-		if (MMetallurgy.oresTab.getTabIconItem() == null)
-			MMetallurgy.oresTab.setTabIconItem(Item.getItemFromBlock(this));
-		this.setCreativeTab(MMetallurgy.oresTab);
 		this.setSoundType(SoundType.STONE);
 		this.setHarvestLevel("pickaxe", blockLevel);
 		this.setUnlocalizedName(MMetallurgy.MOD_ID + "." + name + ".ore");
 		this.setHardness(4.0f); // Time to mine
 		this.setResistance(2.0f); // Explosion resistance
 		this.setTexture(MMetallurgy.MOD_ID + ":blocks/ores/" + name + "_ore");
+
+		if (MMetallurgy.oresTab.getTabIconItem() == null) MMetallurgy.oresTab.setTabIconItem(Item.getItemFromBlock(this));
+		this.setCreativeTab(MMetallurgy.oresTab);
 	}
 
 	@Override

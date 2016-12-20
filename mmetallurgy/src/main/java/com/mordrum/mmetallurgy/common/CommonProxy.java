@@ -137,9 +137,9 @@ public class CommonProxy {
 
 						if (metalConfiguration.get("hasBlocks").getAsBoolean()) {
 							// Register blocks here
-							new SolidBlock(name);
-							new BigBrickBlock(name);
-							new SmallBrickBlock(name);
+							new SolidBlock(name).register();
+							new BigBrickBlock(name).register();
+							new SmallBrickBlock(name).register();
 						}
 					}
 				});
