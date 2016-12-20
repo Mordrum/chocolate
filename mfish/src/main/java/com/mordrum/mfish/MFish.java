@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = MFish.MOD_ID, name = MFish.MOD_NAME, version = MFish.MOD_VERSION)
+@Mod(modid = MFish.MOD_ID, name = MFish.MOD_NAME, version = MFish.MOD_VERSION, dependencies = "required-after:malisiscore;required-after:mcore")
 public class MFish {
     public static final String MOD_ID = "mfish";
     public static final String MOD_NAME = "mFish";

@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  * FML superclass causing all of the things to happen. Registers everything, causes the Mod parts
  * to load, keeps the common config file.
  */
-@Mod(modid = MCore.MODID, name = MCore.NAME, version = MCore.VERSION)
+@Mod(modid = MCore.MODID, name = MCore.NAME, version = MCore.VERSION, dependencies = "required-after:malisiscore")
 public class MCore {
 	public static final String MODID = "mcore";
 	public static final String NAME = "mCore";

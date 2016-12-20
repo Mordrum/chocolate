@@ -25,7 +25,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-@Mod(modid = MMetallurgy.MOD_ID, name = MMetallurgy.MOD_NAME, version = MMetallurgy.VERSION)
+@Mod(modid = MMetallurgy.MOD_ID, name = MMetallurgy.MOD_NAME, version = MMetallurgy.VERSION, dependencies = "required-after:malisiscore")
 public class MMetallurgy {
 	public static final String MOD_ID = "mmetallurgy";
 	static final String MOD_NAME = "MMetallurgy";

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = MCiv.MOD_ID, name = MCiv.MOD_NAME, version = MCiv.MOD_VERSION)
+@Mod(modid = MCiv.MOD_ID, name = MCiv.MOD_NAME, version = MCiv.MOD_VERSION, dependencies = "required-after:malisiscore;required-after:mcore")
 public class MCiv {
 	public static final String MOD_ID = "mciv";
 	public static final String MOD_NAME = "mCiv";
