@@ -13,6 +13,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ClientProxy extends CommonProxy {
 	private InstallMusicGUI installMusicGUI;
 	private MainMenuGUI mainMenuGUI;

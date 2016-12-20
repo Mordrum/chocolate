@@ -27,8 +27,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -86,8 +88,10 @@ public class CommonProxy {
 						// Metal is mineable
 						if (type != MetalType.ALLOY) {
 							OreBlock oreBlock = new OreBlock(name, metalConfiguration.get("blockLevel").getAsInt());
+							oreBlock.register();
 							if (type == MetalType.DROP) {
 								oreBlock.setDrop(ingot);
+								oreBlock.setMaxQuantityDropped(4);
 							} else {
 								FurnaceRecipes.instance().addSmeltingRecipeForBlock(oreBlock, new ItemStack(ingot), 1.0f);
 							}

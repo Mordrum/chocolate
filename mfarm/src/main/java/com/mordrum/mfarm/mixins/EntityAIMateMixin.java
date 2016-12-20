@@ -25,7 +25,7 @@ public class EntityAIMateMixin {
 	@Final
 	private EntityAnimal theAnimal;
 	@Shadow
-	World theWorld;
+	World world;
 	@Shadow
 	private EntityAnimal targetMate;
 
@@ -60,7 +60,7 @@ public class EntityAIMateMixin {
 			this.theAnimal.resetInLove();
 			this.targetMate.resetInLove();
 
-			this.theWorld.spawnEntityInWorld(entityageable);
+			this.world.spawnEntity(entityageable);
 			Random random = this.theAnimal.getRNG();
 
 			for (int i = 0; i < 7; ++i) {
@@ -70,12 +70,12 @@ public class EntityAIMateMixin {
 				double d3 = random.nextDouble()*(double) this.theAnimal.width*2.0D - (double) this.theAnimal.width;
 				double d4 = 0.5D + random.nextDouble()*(double) this.theAnimal.height;
 				double d5 = random.nextDouble()*(double) this.theAnimal.width*2.0D - (double) this.theAnimal.width;
-				this.theWorld.spawnParticle(EnumParticleTypes.HEART,
+				this.world.spawnParticle(EnumParticleTypes.HEART,
 						this.theAnimal.posX + d3, this.theAnimal.posY + d4, this.theAnimal.posZ + d5, d0, d1, d2);
 			}
 
-			if (this.theWorld.getGameRules().getBoolean("doMobLoot")) {
-				this.theWorld.spawnEntityInWorld(new EntityXPOrb(this.theWorld, this.theAnimal.posX, this.theAnimal.posY, this.theAnimal.posZ,
+			if (this.world.getGameRules().getBoolean("doMobLoot")) {
+				this.world.spawnEntity(new EntityXPOrb(this.world, this.theAnimal.posX, this.theAnimal.posY, this.theAnimal.posZ,
 						random.nextInt(7) + 1));
 			}
 		}

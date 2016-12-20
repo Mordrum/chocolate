@@ -11,6 +11,12 @@
       <module name="chocolate_api" target="1.8" />
       <module name="chocolate_main" target="1.8" />
       <module name="chocolate_test" target="1.8" />
+      <module name="gameseer_api" target="1.8" />
+      <module name="gameseer_main" target="1.8" />
+      <module name="gameseer_test" target="1.8" />
+      <module name="mciv_api" target="1.8" />
+      <module name="mciv_main" target="1.8" />
+      <module name="mciv_test" target="1.8" />
       <module name="mclimate_api" target="1.8" />
       <module name="mclimate_main" target="1.8" />
       <module name="mclimate_test" target="1.8" />

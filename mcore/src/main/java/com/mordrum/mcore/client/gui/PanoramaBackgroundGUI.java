@@ -35,14 +35,14 @@ public abstract class PanoramaBackgroundGUI extends MordrumGui {
         GlStateManager.enableAlpha();
 
         // Draw the splash text
-        GlStateManager.pushMatrix();
-        GlStateManager.translate((float) (this.width / 2 + 90), 70.0F, 0.0F);
-        GlStateManager.rotate(-20.0F, 0.0F, 0.0F, 1.0F);
-        float f = 1.8F - MathHelper.abs(MathHelper.sin((float) (Minecraft.getSystemTime() % 1000L) / 1000.0F * 6.2831855F) * 0.1F);
-        f = f * 100.0F / (float) (this.fontRendererObj.getStringWidth(this.splashText) + 32);
-        GlStateManager.scale(f, f, f);
-        this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, -256);
-        GlStateManager.popMatrix();
+//        GlStateManager.pushMatrix();
+//        GlStateManager.translate((float) (this.width / 2 + 90), 70.0F, 0.0F);
+//        GlStateManager.rotate(-20.0F, 0.0F, 0.0F, 1.0F);
+//        float f = 1.8F - MathHelper.abs(MathHelper.sin((float) (Minecraft.getSystemTime() % 1000L) / 1000.0F * 6.2831855F) * 0.1F);
+//        f = f * 100.0F / (float) (this.fontRendererObj.getStringWidth(this.splashText) + 32);
+//        GlStateManager.scale(f, f, f);
+//        this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, -256);
+//        GlStateManager.popMatrix();
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

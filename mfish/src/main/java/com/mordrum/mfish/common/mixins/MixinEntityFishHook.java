@@ -30,28 +30,28 @@ public abstract class MixinEntityFishHook extends Entity {
 
     @Overwrite
     public int handleHookRetraction() {
-        if (this.worldObj.isRemote) {
+        if (this.world.isRemote) {
             return 0;
         } else {
             int i = 0;
 
             if (this.caughtEntity != null) {
                 this.bringInHookedEntity();
-                this.worldObj.setEntityState(this, (byte) 31);
+                this.world.setEntityState(this, (byte) 31);
                 i = this.caughtEntity instanceof EntityItem ? 3 : 5;
             } else if (this.ticksCatchable > 0) {
                 ItemStack itemStack = FishingLootGenerator.getFishingLoot(angler, this);
 
-                EntityItem entityitem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, itemStack);
+                EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, itemStack);
                 double d0 = this.angler.posX - this.posX;
                 double d1 = this.angler.posY - this.posY;
                 double d2 = this.angler.posZ - this.posZ;
-                double d3 = (double) MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
+                double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
                 entityitem.motionX = d0 * 0.1D;
-                entityitem.motionY = d1 * 0.1D + (double) MathHelper.sqrt_double(d3) * 0.08D;
+                entityitem.motionY = d1 * 0.1D + (double) MathHelper.sqrt(d3) * 0.08D;
                 entityitem.motionZ = d2 * 0.1D;
-                this.worldObj.spawnEntityInWorld(entityitem);
-                this.angler.worldObj.spawnEntityInWorld(new EntityXPOrb(this.angler.worldObj, this.angler.posX, this.angler.posY + 0.5D, this.angler.posZ + 0.5D, this.rand.nextInt(6) + 1));
+                this.world.spawnEntity(entityitem);
+                this.angler.world.spawnEntity(new EntityXPOrb(this.angler.world, this.angler.posX, this.angler.posY + 0.5D, this.angler.posZ + 0.5D, this.rand.nextInt(6) + 1));
 
                 i = 1;
             }

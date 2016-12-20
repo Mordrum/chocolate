@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 public class AchievementEventHandler {
 	@SubscribeEvent
 	public void craftingEvent(PlayerEvent.ItemCraftedEvent event) {
-		if (event.player.worldObj.isRemote) return;
+		if (event.player.world.isRemote) return;
 
 		Item item = event.crafting.getItem();
 		if (item instanceof Ingot) {
@@ -45,7 +45,7 @@ public class AchievementEventHandler {
 
 	@SubscribeEvent
 	public void furnaceEvent(PlayerEvent.ItemSmeltedEvent event) {
-		if (event.player.worldObj.isRemote) return;
+		if (event.player.world.isRemote) return;
 
 		if (event.smelting.getUnlocalizedName().equalsIgnoreCase("item.mmetallurgy.grifonium.ingot")) {
 			event.player.addStat(Achievements.ADAM);

@@ -5,6 +5,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.async.Callback;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mordrum.mcore.MCore;
 import com.mordrum.mfish.common.Fish;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -22,7 +23,7 @@ class HighscoreManager {
     static void checkHighscore(EntityPlayer player, Fish fish, double weight) {
         if (player.getEntityWorld().isRemote) return;
 
-        Unirest.post("http://api.mordrum.com/fishing")
+        Unirest.post(MCore.API_URL + "/fishing")
                 .header("accept", "application/json")
                 .header("Content-Type", "application/json")
                 .body(new JSONObject().put("player", player.getUniqueID()).put("fish", fish.getMetadata()).put("weight", weight))
@@ -38,11 +39,11 @@ class HighscoreManager {
                                     .append(fish.getName())
                                     .append("!");
                             TextComponentString component = new TextComponentString(sb.toString());
-                            for (EntityPlayerMP entityPlayerMP : player.getServer().getPlayerList().getPlayerList()) {
-                                entityPlayerMP.addChatComponentMessage(component);
+                            for (EntityPlayerMP entityPlayerMP : player.getServer().getPlayerList().getPlayers()) {
+                                entityPlayerMP.sendMessage(component);
                             }
                         } else {
-                            player.addChatComponentMessage(new TextComponentString("You caught a " + decimalFormat.format(weight) + "lb " + fish.getName()));
+                            player.sendMessage(new TextComponentString("You caught a " + decimalFormat.format(weight) + "lb " + fish.getName()));
                         }
                     }
 

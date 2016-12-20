@@ -6,6 +6,14 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate_api.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate_api.iml" group="chocolate" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate_main.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate_main.iml" group="chocolate" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate_test.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate_test.iml" group="chocolate" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gameseer/gameseer.iml" filepath="$PROJECT_DIR$/.idea/modules/gameseer/gameseer.iml" group="gameseer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gameseer/gameseer_api.iml" filepath="$PROJECT_DIR$/.idea/modules/gameseer/gameseer_api.iml" group="gameseer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gameseer/gameseer_main.iml" filepath="$PROJECT_DIR$/.idea/modules/gameseer/gameseer_main.iml" group="gameseer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gameseer/gameseer_test.iml" filepath="$PROJECT_DIR$/.idea/modules/gameseer/gameseer_test.iml" group="gameseer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mciv/mciv.iml" filepath="$PROJECT_DIR$/.idea/modules/mciv/mciv.iml" group="mciv" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mciv/mciv_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mciv/mciv_api.iml" group="mciv" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mciv/mciv_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mciv/mciv_main.iml" group="mciv" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mciv/mciv_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mciv/mciv_test.iml" group="mciv" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mclimate/mclimate.iml" filepath="$PROJECT_DIR$/.idea/modules/mclimate/mclimate.iml" group="mclimate" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mclimate/mclimate_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mclimate/mclimate_api.iml" group="mclimate" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mclimate/mclimate_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mclimate/mclimate_main.iml" group="mclimate" />

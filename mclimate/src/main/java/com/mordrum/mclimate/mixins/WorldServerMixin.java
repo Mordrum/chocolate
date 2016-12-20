@@ -4,7 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.HorseType;
+import net.minecraft.entity.passive.EntitySkeletonHorse;
 import net.minecraft.init.Blocks;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.server.management.PlayerChunkMap;
@@ -26,7 +26,7 @@ import java.util.Iterator;
 public abstract class WorldServerMixin extends World implements IThreadListener {
     @Shadow
     @Final
-    private PlayerChunkMap thePlayerManager;
+    private PlayerChunkMap playerChunkMap;
 
     protected WorldServerMixin(ISaveHandler saveHandlerIn, WorldInfo info, WorldProvider providerIn, Profiler profilerIn, boolean client) {
         super(saveHandlerIn, info, providerIn, profilerIn, client);
@@ -41,7 +41,7 @@ public abstract class WorldServerMixin extends World implements IThreadListener 
         boolean flag1 = this.isThundering();
         this.theProfiler.startSection("pollingChunks");
 
-        for (Iterator<Chunk> iterator = getPersistentChunkIterable(this.thePlayerManager.getChunkIterator()); iterator.hasNext(); this.theProfiler.endSection()) {
+        for (Iterator<Chunk> iterator = getPersistentChunkIterable(this.playerChunkMap.getChunkIterator()); iterator.hasNext(); this.theProfiler.endSection()) {
             this.theProfiler.startSection("getChunk");
             Chunk chunk = (Chunk) iterator.next();
             int j = chunk.xPosition * 16;
@@ -61,12 +61,11 @@ public abstract class WorldServerMixin extends World implements IThreadListener 
                     DifficultyInstance difficultyinstance = this.getDifficultyForLocation(blockpos);
 
                     if (this.rand.nextDouble() < (double) difficultyinstance.getAdditionalDifficulty() * 0.05D) {
-                        EntityHorse entityhorse = new EntityHorse(this);
-                        entityhorse.setType(HorseType.SKELETON);
-                        entityhorse.setSkeletonTrap(true);
-                        entityhorse.setGrowingAge(0);
-                        entityhorse.setPosition((double) blockpos.getX(), (double) blockpos.getY(), (double) blockpos.getZ());
-                        this.spawnEntityInWorld(entityhorse);
+                        EntitySkeletonHorse skeletonHorse = new EntitySkeletonHorse(this);
+                        skeletonHorse.setTrap(true);
+                        skeletonHorse.setGrowingAge(0);
+                        skeletonHorse.setPosition((double) blockpos.getX(), (double) blockpos.getY(), (double) blockpos.getZ());
+                        this.spawnEntity(skeletonHorse);
                         this.addWeatherEffect(new EntityLightningBolt(this, (double) blockpos.getX(), (double) blockpos.getY(), (double) blockpos.getZ(), true));
                     } else {
                         this.addWeatherEffect(new EntityLightningBolt(this, (double) blockpos.getX(), (double) blockpos.getY(), (double) blockpos.getZ(), false));

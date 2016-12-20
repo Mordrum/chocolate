@@ -57,15 +57,8 @@ public class CustomizeApearanceGUI extends MordrumGui {
         infoContainer.add(titleLabel, infoLabel1);
         // End info
 
-        UIBackgroundContainer window = new UIBackgroundContainer(this);
-        window.setSize(this.width - 20, this.height - 20);
-        window.setAnchor(Anchor.CENTER | Anchor.MIDDLE);
-        window.setColor(Integer.MIN_VALUE);
-        window.setBackgroundAlpha(0);
-
         // Begin color palette setup
         UIBackgroundContainer paletteContainer = new UIBackgroundContainer(this);
-        paletteContainer.setAnchor(Anchor.RIGHT | Anchor.MIDDLE);
         paletteContainer.setBackgroundAlpha(0);
 
         UILabel skinPaletteLabel = new UILabel(this, ChatColor.WHITE + "Skin Tone");
@@ -85,6 +78,8 @@ public class CustomizeApearanceGUI extends MordrumGui {
 
         paletteContainer.add(skinPaletteLabel, skinPalette, hairPaletteLabel, hairPalette, eyePaletteLabel, eyePalette);
         paletteContainer.setSize(skinPalette.getWidth(), paletteContainer.getContentHeight());
+        paletteContainer.setAnchor(Anchor.RIGHT | Anchor.MIDDLE);
+        paletteContainer.setPosition(-10,0);
         // End color palette setup
 
         // Begin Sliders setup
@@ -98,6 +93,7 @@ public class CustomizeApearanceGUI extends MordrumGui {
 
         sliderContainer.add(hairSlider);
         sliderContainer.setSize(hairSlider.getWidth(), sliderContainer.getContentHeight());
+        sliderContainer.setPosition(10, 0);
         // End sliders setup
 
         skinColor = ColorPalettes.DEFAULT_SKIN_TONES.getColors()[0].getRGB();
@@ -110,22 +106,28 @@ public class CustomizeApearanceGUI extends MordrumGui {
         entityContainer.setBackgroundAlpha(0);
 
         UIButton backButton = new UIButton(this, "Back");
-        backButton.setPosition(this.width / 2 - 62, this.height - 30, Anchor.TOP);
         backButton.setSize(60);
         backButton.setName("button.back");
         backButton.register(this);
 
         UIButton nextButton = new UIButton(this, "Next");
-        nextButton.setPosition(this.width / 2 + 2, this.height - 30, Anchor.TOP);
+        nextButton.setPosition(62, 0);
         nextButton.setSize(60);
         nextButton.setName("button.next");
         nextButton.register(this);
 
-        window.add(sliderContainer, entityContainer, paletteContainer);
+        UIBackgroundContainer buttonsContainer = new UIBackgroundContainer(this);
+        buttonsContainer.setPosition(0, -10);
+        buttonsContainer.setSize(122, 20);
+        buttonsContainer.setAnchor(Anchor.BOTTOM | Anchor.CENTER);
+        buttonsContainer.setBackgroundAlpha(0);
+        buttonsContainer.add(backButton, nextButton);
+
         this.addToScreen(infoContainer);
-        this.addToScreen(window);
-        this.addToScreen(backButton);
-        this.addToScreen(nextButton);
+        this.addToScreen(sliderContainer);
+        this.addToScreen(entityContainer);
+        this.addToScreen(paletteContainer);
+        this.addToScreen(buttonsContainer);
 
         try {
             generateSkin();

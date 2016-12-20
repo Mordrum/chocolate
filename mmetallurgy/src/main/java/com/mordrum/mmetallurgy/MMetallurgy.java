@@ -40,6 +40,9 @@ public class MMetallurgy {
 	public static final BricksTab bricksTab = new BricksTab();
 	public static Config config;
 
+	@Mod.Instance(MMetallurgy.MOD_ID)
+	public static MMetallurgy instance;
+
 	@SidedProxy(clientSide = "com.mordrum." + MOD_ID + ".client.ClientProxy", serverSide = "com.mordrum." + MOD_ID + ".common.CommonProxy")
 	private static CommonProxy proxy;
 
@@ -67,7 +70,6 @@ public class MMetallurgy {
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
 	}
-
 
 	@Mod.EventHandler
 	public void stopping(FMLServerStoppedEvent event) {

@@ -2,6 +2,7 @@ package com.mordrum.mmetallurgy.creativetabs;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class OresTab extends CreativeTabs {
     private Item item;
@@ -11,8 +12,8 @@ public class OresTab extends CreativeTabs {
     }
 
     @Override
-    public Item getTabIconItem() {
-        return item;
+    public ItemStack getTabIconItem() {
+        return new ItemStack(item);
     }
 
     public void setTabIconItem(Item item) {

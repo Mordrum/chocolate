@@ -1,31 +1,100 @@
 package com.mordrum.mcore.client.gui;
 
 import com.google.common.eventbus.Subscribe;
-import com.mordrum.mcore.common.query.ServerPinger;
 import net.malisis.core.client.gui.Anchor;
 import net.malisis.core.client.gui.GuiTexture;
+import net.malisis.core.client.gui.MalisisGui;
 import net.malisis.core.client.gui.component.container.UIBackgroundContainer;
 import net.malisis.core.client.gui.component.decoration.UIImage;
 import net.malisis.core.client.gui.component.decoration.UILabel;
 import net.malisis.core.client.gui.component.interaction.UIButton;
-import net.malisis.core.renderer.font.FontRenderOptions;
+import net.malisis.core.renderer.font.FontOptions;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiWorldSelection;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.network.ServerPinger;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import org.lwjgl.opengl.GL11;
 
-import java.net.UnknownHostException;
+import java.awt.*;
+import java.io.IOException;
 import java.util.Calendar;
 
-public class MainMenuGUI extends PanoramaBackgroundGUI {
-	private static final ResourceLocation LOGO_LOCATION = new ResourceLocation("mcore", "textures/gui/mordrum.png");
+public class MainMenuGUI extends MordrumGui {
+	private static final ResourceLocation LOGO_LOCATION = new ResourceLocation("mcore", "textures/gui/freshlogo.png");
+	private UIImage logoImage;
+	private final String serverAddress;
+	private UILabel populationLabel;
+	private ServerData serverData;
+	private ServerPinger pinger;
+	private ResourceLocation backgroundTexture;
+
+	public MainMenuGUI() {
+		String environment = System.getProperty("environment");
+		if ((environment != null && environment.equalsIgnoreCase("development"))) {
+			serverAddress = "localhost:25565";
+		} else {
+			serverAddress = "play.mordrum.com:25575";
+		}
+		this.guiscreenBackground = false;
+	}
 
 	@Override
 	public void construct() {
 		constructButtonsContainer();
 		constructServerStats();
+		backgroundTexture = new ResourceLocation("mcore", "textures/gui/background.png");
+	}
+
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		Minecraft.getMinecraft().renderEngine.bindTexture(backgroundTexture);
+		int x = 0;
+		int y = 0;
+		drawCompleteImage(x, y, this.width, this.height);
+		super.drawScreen(mouseX, mouseY, partialTicks);
+	}
+
+	public static void drawCompleteImage(int posX, int posY, int width, int height) {
+		GL11.glPushMatrix();
+		GL11.glTranslatef((float) posX, (float) posY, 0.0F);
+		GL11.glBegin(7);
+		GL11.glTexCoord2f(0.0F, 0.0F);
+		GL11.glVertex3f(0.0F, 0.0F, 0.0F);
+		GL11.glTexCoord2f(0.0F, 1.0F);
+		GL11.glVertex3f(0.0F, (float) height, 0.0F);
+		GL11.glTexCoord2f(1.0F, 1.0F);
+		GL11.glVertex3f((float) width, (float) height, 0.0F);
+		GL11.glTexCoord2f(1.0F, 0.0F);
+		GL11.glVertex3f((float) width, 0.0F, 0.0F);
+		GL11.glEnd();
+		GL11.glPopMatrix();
+	}
+
+	private void constructEventDetailsContainer() {
+		UIBackgroundContainer eventContainer = new UIBackgroundContainer(this);
+		eventContainer.setPosition(-20, 0);
+		eventContainer.setSize(this.width/5*2, this.height/3*2);
+		eventContainer.setAnchor(Anchor.RIGHT | Anchor.MIDDLE);
+		this.addToScreen(eventContainer);
+
+		UILabel eventTitle = new UILabel(this, "Current Event: Brave New World");
+
+		UILabel eventDescription = new UILabel(this, true);
+		eventDescription.setText(
+				"Settlers from the Old World have finally made landfall on a new and exciting continent, full of surprises and adventure. " +
+						"In an effort to learn more about this new land, the Council of Mordrum is offering bounties in exchange for discoveries.\n" +
+						"To participate, unlock achievements"
+		);
+		eventDescription.setPosition(eventTitle.getX(), getPaddedY(eventTitle));
+		eventDescription.setSize(eventContainer.getWidth(), eventContainer.getHeight() - eventDescription.getY());
+
+		eventContainer.add(eventTitle, eventDescription);
 	}
 
 	@Override
@@ -34,38 +103,40 @@ public class MainMenuGUI extends PanoramaBackgroundGUI {
 	}
 
 	private void constructServerStats() {
-		ServerPinger serverPinger = new ServerPinger();
-		UILabel statsLabel = new UILabel(this);
+		populationLabel = new UILabel(this);
+		populationLabel.setText("Players Online: Loading...");
 
 		try {
-			ServerData serverData = new ServerData("mordrum", "play.mordrum.com", false);
-			serverPinger.ping(serverData);
-			statsLabel.setText(TextFormatting.AQUA + "Players Online: " + TextFormatting.RED + serverData.populationInfo);
-		} catch (UnknownHostException e) {
+			serverData = new ServerData("mordrum", this.serverAddress, false);
+			pinger = new ServerPinger();
+			pinger.ping(serverData);
+			pinger.pingPendingNetworks();
+		} catch (IOException e) {
 			e.printStackTrace();
-			statsLabel.setText("Error: " + e.getMessage());
 		}
 
-		statsLabel.setAnchor(Anchor.RIGHT | Anchor.MIDDLE);
-		this.addToScreen(statsLabel);
+		populationLabel.setAnchor(Anchor.CENTER | Anchor.TOP);
+		populationLabel.setPosition(0, getPaddedY(logoImage, 20));
+		this.addToScreen(populationLabel);
 	}
 
 	private void constructButtonsContainer() {
 		UIBackgroundContainer buttonsContainer = new UIBackgroundContainer(this);
-		buttonsContainer.setAnchor(Anchor.LEFT);
-		buttonsContainer.setBackgroundAlpha(0);
 
-		UILabel titleLabel = new UILabel(this, ChatColor.WHITE + "Welcome to Mordrum");
-		titleLabel.setPosition(0, 5, Anchor.CENTER | Anchor.TOP);
+		UILabel updateName = new UILabel(this, "Brave New World");
+		updateName.setPosition(0, 20, Anchor.CENTER | Anchor.TOP);
+		updateName.setFontOptions(new FontOptions.FontOptionsBuilder().color(Color.GREEN.getRGB()).scale(2.0f).build());
 
-		UIImage logoImage = new UIImage(this, new GuiTexture(LOGO_LOCATION), null);
+		logoImage = new UIImage(this, new GuiTexture(LOGO_LOCATION), null);
 		logoImage.setAnchor(Anchor.CENTER | Anchor.TOP);
-		logoImage.setPosition(0, this.getPaddedY(titleLabel, 12));
-		logoImage.setSize(64, 64);
+		logoImage.setPosition(0, 20);
+//		logoImage.setSize(362, 64);
+		logoImage.setSize(254, 45);
+		this.addToScreen(logoImage);
 
-		UIButton multiplayerButton = new UIButton(this, ChatColor.AQUA + "Connect to Mordrum");
+		UIButton multiplayerButton = new UIButton(this, ChatColor.AQUA + "Play");
 		multiplayerButton.setSize(180);
-		multiplayerButton.setPosition(0, this.getPaddedY(logoImage, 12), Anchor.CENTER | Anchor.TOP);
+		multiplayerButton.setPosition(0, 120, Anchor.CENTER | Anchor.TOP);
 		multiplayerButton.setName("button.multiplayer");
 		multiplayerButton.register(this);
 
@@ -84,7 +155,7 @@ public class MainMenuGUI extends PanoramaBackgroundGUI {
 		if ((environment != null && environment.equalsIgnoreCase("development"))) {
 			UIButton singlePlayerButton = new UIButton(this, "Single Player");
 			singlePlayerButton.setSize(180);
-			singlePlayerButton.setPosition(0, this.getPaddedY(optionsButton, 4), Anchor.LEFT | Anchor.TOP);
+			singlePlayerButton.setPosition(0, this.getPaddedY(optionsButton, 4), Anchor.CENTER | Anchor.TOP);
 			singlePlayerButton.setName("button.singleplayer");
 			singlePlayerButton.register(this);
 			buttonsContainer.add(singlePlayerButton);
@@ -94,21 +165,42 @@ public class MainMenuGUI extends PanoramaBackgroundGUI {
 			quitButton.setPosition(0, this.getPaddedY(optionsButton, 14), Anchor.CENTER | Anchor.TOP);
 		}
 
-		FontRenderOptions fro = new FontRenderOptions();
-		fro.fontScale = 0.7f;
 
-		UILabel copyrightLabel = new UILabel(this, ChatColor.DARK_GRAY + "Copyright Mordrum 2011 - " + Calendar.getInstance().get(Calendar.YEAR));
-		copyrightLabel.setPosition(0, -9, Anchor.CENTER | Anchor.BOTTOM);
-		copyrightLabel.setFontRenderOptions(fro);
+		FontOptions fro = new FontOptions.FontOptionsBuilder()
+				.scale(0.7f)
+				.build();
 
-		UILabel trademarkLabel = new UILabel(this, ChatColor.DARK_GRAY + "Minecraft is a registered trademark of Mojang AB");
-		trademarkLabel.setPosition(0, -1, Anchor.CENTER | Anchor.BOTTOM);
-		trademarkLabel.setFontRenderOptions(fro);
+		UILabel copyrightLabel = new UILabel(this,
+				ChatColor.DARK_GRAY + "Copyright Mordrum 2011 - " + Calendar.getInstance().get(Calendar.YEAR));
+		copyrightLabel.setPosition(0, -12, Anchor.CENTER | Anchor.BOTTOM);
+		copyrightLabel.setFontOptions(fro);
 
-		buttonsContainer.add(titleLabel, logoImage, multiplayerButton, optionsButton, quitButton, copyrightLabel, trademarkLabel);
-		buttonsContainer.setSize(buttonsContainer.getContentWidth(), this.height);
-		buttonsContainer.setPosition(10, 0);
+		UILabel trademarkLabel = new UILabel(this,
+				ChatColor.DARK_GRAY + "Minecraft is a registered trademark of Mojang AB");
+		trademarkLabel.setPosition(0, -4, Anchor.CENTER | Anchor.BOTTOM);
+		trademarkLabel.setFontOptions(fro);
+
+		buttonsContainer.add(multiplayerButton, optionsButton, quitButton, copyrightLabel, trademarkLabel);
+		buttonsContainer.setSize(180, this.height);
+		buttonsContainer.setAnchor(Anchor.CENTER);
+		buttonsContainer.setBackgroundAlpha(0);
+//		buttonsContainer.setPosition((int) (this.width * -0.25), 0);
+
+
 		this.addToScreen(buttonsContainer);
+	}
+
+	@Override
+	public void update(int mouseX, int mouseY, float partialTick) {
+		super.update(mouseX, mouseY, partialTick);
+		pinger.pingPendingNetworks();
+
+		int playersOnline = 0;
+		if (serverData.playerList != null) {
+			playersOnline = serverData.playerList.split(" ").length;
+			if (playersOnline > 2) playersOnline -= 1;
+		}
+		populationLabel.setText(TextFormatting.AQUA + "Players Online: " + TextFormatting.RED + playersOnline);
 	}
 
 	@Subscribe
@@ -117,14 +209,8 @@ public class MainMenuGUI extends PanoramaBackgroundGUI {
 		if (buttonID.equalsIgnoreCase("button.multiplayer")) {
 			FMLClientHandler.instance().setupServerList();
 
-			String environment = System.getProperty("environment");
-			if ((environment != null && environment.equalsIgnoreCase("development"))) {
-				ServerData data = new ServerData("Mordrum", "localhost:25565", false);
-				FMLClientHandler.instance().connectToServer(this, data);
-			} else {
-				ServerData data = new ServerData("Mordrum", "play.mordrum.com:25575", false);
-				FMLClientHandler.instance().connectToServer(this, data);
-			}
+			ServerData data = new ServerData("Mordrum", this.serverAddress, false);
+			FMLClientHandler.instance().connectToServer(this, data);
 		} else if (buttonID.equalsIgnoreCase("button.quit")) {
 			this.mc.shutdown();
 		} else if (buttonID.equalsIgnoreCase("button.options")) {
@@ -133,4 +219,5 @@ public class MainMenuGUI extends PanoramaBackgroundGUI {
 			this.mc.displayGuiScreen(new GuiWorldSelection(this));
 		}
 	}
+
 }

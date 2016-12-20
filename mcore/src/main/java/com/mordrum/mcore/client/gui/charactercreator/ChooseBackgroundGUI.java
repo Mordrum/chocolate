@@ -74,21 +74,26 @@ public class ChooseBackgroundGUI extends MordrumGui {
         interactiveContainer.setBackgroundAlpha(0);
 
         UIButton backButton = new UIButton(this, "Back");
-        backButton.setPosition(this.width / 2 - 62, this.height - 30, Anchor.TOP);
         backButton.setSize(60);
         backButton.setName("button.back");
         backButton.register(this);
 
         UIButton nextButton = new UIButton(this, "Next");
-        nextButton.setPosition(this.width / 2 + 2, this.height - 30, Anchor.TOP);
+        nextButton.setPosition(62, 0);
         nextButton.setSize(60);
         nextButton.setName("button.next");
         nextButton.register(this);
 
+        UIBackgroundContainer buttonsContainer = new UIBackgroundContainer(this);
+        buttonsContainer.setPosition(0, -10);
+        buttonsContainer.setSize(122, 20);
+        buttonsContainer.setAnchor(Anchor.BOTTOM | Anchor.CENTER);
+        buttonsContainer.setBackgroundAlpha(0);
+        buttonsContainer.add(backButton, nextButton);
+
         this.addToScreen(infoContainer);
         this.addToScreen(interactiveContainer);
-        this.addToScreen(backButton);
-        this.addToScreen(nextButton);
+        this.addToScreen(buttonsContainer);
     }
 
     @Subscribe

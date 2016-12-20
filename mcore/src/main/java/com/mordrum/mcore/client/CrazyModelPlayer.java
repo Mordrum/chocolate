@@ -131,7 +131,7 @@ public class CrazyModelPlayer extends ModelPlayer {
             EnumHandSide enumhandside = EnumHandSide.RIGHT;
             ModelRenderer modelrenderer = this.getArmForSide(enumhandside);
             float f1 = this.swingProgress;
-            this.bipedBody.rotateAngleY = net.minecraft.util.math.MathHelper.sin(net.minecraft.util.math.MathHelper.sqrt_float(f1) * ((float) Math.PI * 2F)) * 0.2F;
+            this.bipedBody.rotateAngleY = net.minecraft.util.math.MathHelper.sin(net.minecraft.util.math.MathHelper.sqrt(f1) * ((float) Math.PI * 2F)) * 0.2F;
 
             this.bipedRightArm.rotationPointZ = net.minecraft.util.math.MathHelper.sin(this.bipedBody.rotateAngleY) * 5.0F;
             this.bipedRightArm.rotationPointX = -net.minecraft.util.math.MathHelper.cos(this.bipedBody.rotateAngleY) * 5.0F;

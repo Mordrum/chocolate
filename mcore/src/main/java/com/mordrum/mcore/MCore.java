@@ -20,9 +20,19 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  */
 @Mod(modid = MCore.MODID, name = MCore.NAME, version = MCore.VERSION)
 public class MCore {
-	public static final String MODID = "mCore";
+	public static final String MODID = "mcore";
 	public static final String NAME = "mCore";
 	public static final String VERSION = "1.1";
+	public static final String API_URL;
+
+	static {
+		String environment = System.getProperty("environment");
+		if ((environment != null && environment.equalsIgnoreCase("development"))) {
+			API_URL = "http://localhost:8080";
+		} else {
+			API_URL = "http://api.mordrum.com";
+		}
+	}
 
 	@Instance(MCore.MODID)
 	private static MCore instance;

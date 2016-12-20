@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 import java.util.Random;
 
 public class BigBrickBlock extends MalisisBlock {
-    private final String name;
+//    private final String name;
 
     public BigBrickBlock(String metal) {
         super(Material.IRON);
