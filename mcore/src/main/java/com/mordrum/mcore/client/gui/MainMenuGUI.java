@@ -39,7 +39,7 @@ public class MainMenuGUI extends MordrumGui {
 		if ((environment != null && environment.equalsIgnoreCase("development"))) {
 			serverAddress = "localhost:25565";
 		} else {
-			serverAddress = "play.mordrum.com:25575";
+			serverAddress = "modded.mordrum.com:25565";
 		}
 		this.guiscreenBackground = false;
 	}
