@@ -17,7 +17,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="chocolate_api" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -36,6 +35,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="chocolate_api" />
     <orderEntry type="module" module-name="mcore_main" />
     <orderEntry type="module" module-name="mclimate_main" />
     <orderEntry type="module" module-name="mfish_main" />
