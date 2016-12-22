@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.5.7",
+  "package": "com.mordrum.mciv.mixins",
+  "refmap": "mixins.mciv.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
