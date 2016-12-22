@@ -1,5 +1,6 @@
 package com.mordrum.mcore.client.gui.charactercreator;
 
+import com.google.common.base.Converter;
 import com.google.common.eventbus.Subscribe;
 import com.mordrum.mcore.client.CrazyModelPlayer;
 import com.mordrum.mcore.client.gui.ChatColor;
@@ -16,6 +17,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -87,7 +89,22 @@ public class CustomizeApearanceGUI extends MordrumGui {
         sliderContainer.setAnchor(Anchor.LEFT | Anchor.MIDDLE);
         sliderContainer.setBackgroundAlpha(0);
 
-        UISlider hairSlider = new UISlider(this, skinPalette.getWidth(), 0, 2, "Hair Style");
+        Converter<Float, Integer> converter = new Converter<Float, Integer>() {
+            @Override
+            protected Integer doForward(@NotNull Float aFloat) {
+                if (aFloat < 0.33) return 0;
+                else if (aFloat < 0.66) return 1;
+                else return 2;
+            }
+
+            @Override
+            protected Float doBackward(@NotNull Integer integer) {
+                if (integer == 1) return 0.33f;
+                else if (integer == 2) return 0.66f;
+                else return 1.0f;
+            }
+        };
+        UISlider hairSlider = new UISlider(this, skinPalette.getWidth(), converter, "Hair Style");
         hairSlider.setPosition(0, 0, Anchor.CENTER | Anchor.TOP);
         hairSlider.register(this);
 
