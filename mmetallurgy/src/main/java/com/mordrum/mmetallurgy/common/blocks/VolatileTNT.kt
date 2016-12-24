@@ -7,6 +7,7 @@ import net.malisis.core.renderer.icon.provider.IIconProvider
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
@@ -24,6 +25,8 @@ import net.minecraftforge.fml.relauncher.Side
 class VolatileTNT : MalisisBlock(Material.TNT) {
     init {
         setName("volatile_tnt")
+        setCreativeTab(CreativeTabs.REDSTONE)
+
         if (MalisisCore.isClient()) {
             val build = IIconProvider.create(MMetallurgy.MOD_ID + ":blocks/misc/volatile_tnt_", "side")
                     .withSide(EnumFacing.UP, "top")
