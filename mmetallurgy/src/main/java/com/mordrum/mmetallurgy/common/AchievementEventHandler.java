@@ -4,7 +4,9 @@ import com.mordrum.mmetallurgy.items.Armor;
 import com.mordrum.mmetallurgy.items.Ingot;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatisticsManagerServer;
 import net.minecraft.util.JsonSerializableSet;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -17,25 +19,33 @@ public class AchievementEventHandler {
 
 		Item item = event.crafting.getItem();
 		if (item instanceof Ingot) {
-			 Ingot ingot = (Ingot) item;
-			 if (ingot.isAlloy()) {
-				 event.player.addStat(Achievements.STRONGER_TOGETHER);
-				 if (ingot.getUnlocalizedName().equalsIgnoreCase("item.mmetallurgy.damascus_steel.ingot")) {
-					 event.player.addStat(Achievements.LOST_TO_THE_AGES);
-				 }
+			Ingot ingot = (Ingot) item;
 
-				 StatisticsManagerServer statFile = ((EntityPlayerMP) event.player).getStatFile();
-				 if (!statFile.hasAchievementUnlocked(Achievements.METAL_SMITH)) {
-					 JsonSerializableSet jsonserializableset = statFile.getProgress(Achievements.METAL_SMITH);
-					 if (jsonserializableset == null) {
-						 jsonserializableset = statFile.setProgress(Achievements.METAL_SMITH, new JsonSerializableSet());
-					 }
-					 jsonserializableset.add(ingot.getName());
-					 if (jsonserializableset.size() >= 4) {
-						 event.player.addStat(Achievements.METAL_SMITH);
-					 }
-				 }
-			 }
+			// Prevent breaking apart a metal block from triggering the achievement
+			IInventory craftMatrix = event.craftMatrix;
+			for (int i = 0; i < craftMatrix.getSizeInventory(); i++) {
+				ItemStack stackInSlot = craftMatrix.getStackInSlot(i);
+				if (stackInSlot.getUnlocalizedName().contains("block")) return;
+			}
+
+			if (ingot.isAlloy()) {
+				event.player.addStat(Achievements.STRONGER_TOGETHER);
+				if (ingot.getUnlocalizedName().equalsIgnoreCase("item.mmetallurgy.damascus_steel.ingot")) {
+					event.player.addStat(Achievements.LOST_TO_THE_AGES);
+				}
+
+				StatisticsManagerServer statFile = ((EntityPlayerMP) event.player).getStatFile();
+				if (!statFile.hasAchievementUnlocked(Achievements.METAL_SMITH)) {
+					JsonSerializableSet jsonserializableset = statFile.getProgress(Achievements.METAL_SMITH);
+					if (jsonserializableset == null) {
+						jsonserializableset = statFile.setProgress(Achievements.METAL_SMITH, new JsonSerializableSet());
+					}
+					jsonserializableset.add(ingot.getName());
+					if (jsonserializableset.size() >= 4) {
+						event.player.addStat(Achievements.METAL_SMITH);
+					}
+				}
+			}
 		} else if (item instanceof Armor) {
 			event.player.addStat(Achievements.NEW_STYLE);
 		} else if (item.equals(Items.GUNPOWDER)) {
