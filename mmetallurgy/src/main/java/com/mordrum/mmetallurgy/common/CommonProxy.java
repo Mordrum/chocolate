@@ -53,16 +53,19 @@ public class CommonProxy {
 	}
 
 	public void preInit(FMLPreInitializationEvent event) {
+		CraftingManager cm = CraftingManager.getInstance();
+
 		loadMetals();
 		loadAlloys();
 
-		// Register volatile TNT
+		// Register volatile TNT and add its crafting recipe
 		VolatileTNT volatileTNT = new VolatileTNT();
 		volatileTNT.register();
+		ItemStack tntItemBlock = new ItemStack(Blocks.TNT);
+		cm.addShapelessRecipe(new ItemStack(volatileTNT), tntItemBlock, tntItemBlock, tntItemBlock, tntItemBlock);
 
 		// Special one-off gunpowder recipe
-		CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.GUNPOWDER, 2), Item.getByNameOrId(MMetallurgy.MOD_ID + ":sulfur_ingot"), Item.getByNameOrId(MMetallurgy.MOD_ID + ":saltpeter_ingot"));
-		CraftingManager.getInstance().addShapelessRecipe(new ItemStack(volatileTNT), new ItemStack(Blocks.TNT, 4));
+		cm.addShapelessRecipe(new ItemStack(Items.GUNPOWDER, 2), Item.getByNameOrId(MMetallurgy.MOD_ID + ":sulfur_ingot"), Item.getByNameOrId(MMetallurgy.MOD_ID + ":saltpeter_ingot"));
 
 		// World generators
 		GameRegistry.registerWorldGenerator(new VeinGenerator(MMetallurgy.config.getConfigList("veins")), 1000);
@@ -75,6 +78,9 @@ public class CommonProxy {
 	}
 
 	private void loadMetals() {
+		CraftingManager craftingManager = CraftingManager.getInstance();
+		FurnaceRecipes furnaceRecipes = FurnaceRecipes.instance();
+
 		// Read our metal configuration files
 		metalCategories.stream()
 				.map(MMetallurgy::getResourceAsJSON)
@@ -92,6 +98,7 @@ public class CommonProxy {
 								.toLowerCase();
 
 						Ingot ingot = new Ingot(name);
+						ItemStack ingotStack = new ItemStack(ingot);
 
 						// Metal is mineable
 						if (type != MetalType.ALLOY) {
@@ -101,7 +108,7 @@ public class CommonProxy {
 								oreBlock.setDrop(ingot);
 								oreBlock.setMaxQuantityDropped(4);
 							} else {
-								FurnaceRecipes.instance().addSmeltingRecipeForBlock(oreBlock, new ItemStack(ingot), 1.0f);
+								furnaceRecipes.addSmeltingRecipeForBlock(oreBlock, ingotStack, 1.0f);
 							}
 						} else {
 							ingot.setAlloy(true);
@@ -118,7 +125,7 @@ public class CommonProxy {
 											armorStrength,
 											armorStrength,
 											armorStrength
-									}, metalConfiguration.get("enchantability").getAsInt(), SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+									}, metalConfiguration.get("enchantability").getAsInt(), SoundEvents.ITEM_ARMOR_EQUIP_IRON, metalConfiguration.get("armorToughness").getAsFloat());
 
 							armors.add(new Armor(name, armorMaterial, 1, EntityEquipmentSlot.FEET));
 							armors.add(new Armor(name, armorMaterial, 2, EntityEquipmentSlot.LEGS));
@@ -147,13 +154,14 @@ public class CommonProxy {
 							// Register blocks here
 							SolidBlock solidBlock = new SolidBlock(name);
 							solidBlock.register();
-							CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Item.getItemFromBlock(solidBlock)), new ItemStack(ingot, 9));
+							craftingManager.addShapelessRecipe(new ItemStack(Item.getItemFromBlock(solidBlock)), ingotStack, ingotStack, ingotStack, ingotStack, ingotStack, ingotStack, ingotStack, ingotStack, ingotStack);
+							craftingManager.addShapelessRecipe(new ItemStack(ingot, 9), Item.getItemFromBlock(solidBlock));
 							BigBrickBlock bigBrickBlock = new BigBrickBlock(name);
 							bigBrickBlock.register();
-							CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Item.getItemFromBlock(bigBrickBlock), 4), new ItemStack(ingot, 4));
+							craftingManager.addShapelessRecipe(new ItemStack(Item.getItemFromBlock(bigBrickBlock), 4), ingotStack, ingotStack, ingotStack, ingotStack);
 							SmallBrickBlock smallBrickBlock = new SmallBrickBlock(name);
 							smallBrickBlock.register();
-							CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Item.getItemFromBlock(smallBrickBlock), 3), new ItemStack(ingot, 3));
+							craftingManager.addShapelessRecipe(new ItemStack(Item.getItemFromBlock(smallBrickBlock), 3), ingotStack, ingotStack, ingotStack);
 						}
 					}
 				});

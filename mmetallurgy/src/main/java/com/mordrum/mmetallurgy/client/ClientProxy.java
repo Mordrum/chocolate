@@ -1,17 +1,12 @@
 package com.mordrum.mmetallurgy.client;
 
 import com.mordrum.mmetallurgy.common.CommonProxy;
-import com.mordrum.mmetallurgy.common.blocks.VolatileTNT;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy {
 	@Override
