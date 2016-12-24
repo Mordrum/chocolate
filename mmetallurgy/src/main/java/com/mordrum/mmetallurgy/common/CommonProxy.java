@@ -9,16 +9,19 @@ import com.mordrum.mmetallurgy.blocks.BigBrickBlock;
 import com.mordrum.mmetallurgy.blocks.OreBlock;
 import com.mordrum.mmetallurgy.blocks.SmallBrickBlock;
 import com.mordrum.mmetallurgy.blocks.SolidBlock;
+import com.mordrum.mmetallurgy.common.blocks.VolatileTNT;
 import com.mordrum.mmetallurgy.common.generation.OreGenerator;
 import com.mordrum.mmetallurgy.common.generation.VeinGenerator;
 import com.mordrum.mmetallurgy.items.Armor;
 import com.mordrum.mmetallurgy.items.Ingot;
 import com.mordrum.mmetallurgy.items.Tools;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -53,8 +56,16 @@ public class CommonProxy {
 		loadMetals();
 		loadAlloys();
 
+		// Register volatile TNT
+		VolatileTNT volatileTNT = new VolatileTNT();
+		GameRegistry.register(volatileTNT);
+		ItemBlock volatileTNTItem = new ItemBlock(volatileTNT);
+		volatileTNTItem.setRegistryName(volatileTNT.getRegistryName());
+		GameRegistry.register(volatileTNTItem);
+
 		// Special one-off gunpowder recipe
 		CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.GUNPOWDER, 2), Item.getByNameOrId(MMetallurgy.MOD_ID + ":sulfur_ingot"), Item.getByNameOrId(MMetallurgy.MOD_ID + ":saltpeter_ingot"));
+		CraftingManager.getInstance().addShapelessRecipe(new ItemStack(volatileTNT), new ItemStack(Blocks.TNT, 4));
 
 		// World generators
 		GameRegistry.registerWorldGenerator(new VeinGenerator(MMetallurgy.config.getConfigList("veins")), 1000);

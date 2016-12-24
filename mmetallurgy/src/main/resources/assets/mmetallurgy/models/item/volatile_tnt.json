@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "mmetallurgy:blocks/misc/volatile_tnt_bottom",
+        "top": "mmetallurgy:blocks/misc/volatile_tnt_top",
+        "side": "mmetallurgy:blocks/misc/volatile_tnt_side"
+    }
+}
