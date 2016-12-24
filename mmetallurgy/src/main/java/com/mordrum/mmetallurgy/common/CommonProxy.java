@@ -145,9 +145,15 @@ public class CommonProxy {
 
 						if (metalConfiguration.get("hasBlocks").getAsBoolean()) {
 							// Register blocks here
-							new SolidBlock(name).register();
-							new BigBrickBlock(name).register();
-							new SmallBrickBlock(name).register();
+							SolidBlock solidBlock = new SolidBlock(name);
+							solidBlock.register();
+							CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Item.getItemFromBlock(solidBlock)), new ItemStack(ingot, 9));
+							BigBrickBlock bigBrickBlock = new BigBrickBlock(name);
+							bigBrickBlock.register();
+							CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Item.getItemFromBlock(bigBrickBlock), 4), new ItemStack(ingot, 4));
+							SmallBrickBlock smallBrickBlock = new SmallBrickBlock(name);
+							smallBrickBlock.register();
+							CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Item.getItemFromBlock(smallBrickBlock), 3), new ItemStack(ingot, 3));
 						}
 					}
 				});
