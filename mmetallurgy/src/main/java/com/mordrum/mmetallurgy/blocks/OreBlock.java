@@ -45,7 +45,7 @@ public class OreBlock extends MalisisBlock {
 
 	@Override
 	public int quantityDropped(IBlockState state, int fortune, Random random) {
-		return random.nextInt(maxQuantityDropped) + fortune;
+		return random.nextInt(maxQuantityDropped) + fortune + 1;
 	}
 
 	public void setDrop(Item drop) {
