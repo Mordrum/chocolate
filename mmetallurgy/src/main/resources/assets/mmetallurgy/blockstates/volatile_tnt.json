@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "normal": { "model": "tnt" },
-        "explode=false": { "model": "tnt" },
-        "explode=true": { "model": "tnt" }
-    }
-}

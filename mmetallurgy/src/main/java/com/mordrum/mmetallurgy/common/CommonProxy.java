@@ -58,10 +58,7 @@ public class CommonProxy {
 
 		// Register volatile TNT
 		VolatileTNT volatileTNT = new VolatileTNT();
-		GameRegistry.register(volatileTNT);
-		ItemBlock volatileTNTItem = new ItemBlock(volatileTNT);
-		volatileTNTItem.setRegistryName(volatileTNT.getRegistryName());
-		GameRegistry.register(volatileTNTItem);
+		volatileTNT.register();
 
 		// Special one-off gunpowder recipe
 		CraftingManager.getInstance().addShapelessRecipe(new ItemStack(Items.GUNPOWDER, 2), Item.getByNameOrId(MMetallurgy.MOD_ID + ":sulfur_ingot"), Item.getByNameOrId(MMetallurgy.MOD_ID + ":saltpeter_ingot"));
