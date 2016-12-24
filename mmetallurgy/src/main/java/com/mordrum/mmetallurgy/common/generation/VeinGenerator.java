@@ -1,5 +1,6 @@
 package com.mordrum.mmetallurgy.common.generation;
 
+import com.google.common.primitives.Ints;
 import com.mordrum.mmetallurgy.common.generation.util.Vein;
 import com.typesafe.config.Config;
 import net.minecraft.block.Block;
@@ -49,9 +50,7 @@ public class VeinGenerator implements IWorldGenerator {
 			double currentWeight = generationConfig.getDouble("generationChance");
 			if (r >= totalWeight && r < (totalWeight + currentWeight)) {
 				int seedX = chunkX * 16 + random.nextInt(16);
-				int[] heightMap = Arrays.copyOf(world.getChunkFromChunkCoords(chunkX, chunkZ).getHeightMap(), 256);
-				Arrays.sort(heightMap);
-				int seedY = heightMap[255]; // Choose the highest block
+				int seedY = Ints.max(world.getChunkFromChunkCoords(chunkX, chunkZ).getHeightMap());; // Choose the highest block
 				int seedZ = chunkZ * 16 + random.nextInt(16);
 				BlockPos seedPos = new BlockPos(seedX, seedY, seedZ);
 				Vein vein = this.generateVein(random, generationConfig, seedPos);
