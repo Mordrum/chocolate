@@ -2,13 +2,13 @@
   {
     "name": "Calitonium",
     "type": "Ore",
-    "blockLevel": 5,
+    "blockLevel": 4,
     "hasBlocks": false
   },
   {
     "name": "Grifonium",
     "type": "Ore",
-    "blockLevel": 5,
+    "blockLevel": 4,
     "hasBlocks": false
   }
 ]
