@@ -2,12 +2,14 @@
   {
     "name": "Sulfur",
     "type": "Drop",
+    "isToxic": false,
     "blockLevel": 1,
     "hasBlocks": false
   },
   {
     "name": "Saltpeter",
     "type": "Drop",
+    "isToxic": false,
     "blockLevel": 1,
     "hasBlocks": false
   }

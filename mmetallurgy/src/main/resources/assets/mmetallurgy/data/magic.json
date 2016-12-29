@@ -2,12 +2,14 @@
   {
     "name": "Calitonium",
     "type": "Ore",
+    "isToxic": true,
     "blockLevel": 4,
     "hasBlocks": false
   },
   {
     "name": "Grifonium",
     "type": "Ore",
+    "isToxic": true,
     "blockLevel": 4,
     "hasBlocks": false
   }

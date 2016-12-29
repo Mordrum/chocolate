@@ -2,6 +2,7 @@
   {
     "name": "Copper",
     "type": "Ore",
+    "isToxic": false,
     "blockLevel": 1,
     "armorStrength": 2,
     "armorDurability": 100,
@@ -16,12 +17,14 @@
   {
     "name": "Tin",
     "type": "Catalyst",
+    "isToxic": false,
     "blockLevel": 1,
     "hasBlocks": true
   },
   {
     "name": "Manganese",
     "type": "Catalyst",
+    "isToxic": false,
     "blockLevel": 2,
     "hasBlocks": true
   },
@@ -32,7 +35,7 @@
     "armorStrength": 3,
     "armorDurability": 220,
     "armorToughness": 0.0,
-    "toolStrength": 3,
+    "toolStrength": 2,
     "toolDurability": 600,
     "toolSpeed": 5.0,
     "toolDamage": 1.5,
@@ -50,7 +53,7 @@
     "armorStrength": 4,
     "armorDurability": 200,
     "armorToughness": 1.0,
-    "toolStrength": 2,
+    "toolStrength": 3,
     "toolDurability": 400,
     "toolSpeed": 5.0,
     "toolDamage": 1.5,
@@ -94,7 +97,8 @@
     "hasBlocks": true,
     "components": [
       "mmetallurgy:steel_ingot",
-      "leaves"
+      "leaves",
+      "log"
     ]
   }
 ]

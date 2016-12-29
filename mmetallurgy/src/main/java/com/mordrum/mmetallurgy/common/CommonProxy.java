@@ -102,7 +102,7 @@ public class CommonProxy {
 
 						// Metal is mineable
 						if (type != MetalType.ALLOY) {
-							OreBlock oreBlock = new OreBlock(name, metalConfiguration.get("blockLevel").getAsInt());
+							OreBlock oreBlock = new OreBlock(name, metalConfiguration.get("blockLevel").getAsInt(), metalConfiguration.get("isToxic").getAsBoolean());
 							oreBlock.register();
 							if (type == MetalType.DROP) {
 								oreBlock.setDrop(ingot);

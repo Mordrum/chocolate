@@ -6,7 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -15,12 +18,14 @@ import java.util.Random;
 public class OreBlock extends MalisisBlock {
 	private Item drop;
 	private int maxQuantityDropped;
+	private final boolean isToxic;
 
-	public OreBlock(String name, int blockLevel) {
+	public OreBlock(String name, int blockLevel, boolean isToxic) {
 		super(Material.ROCK);
 
 		this.setName(name + "_ore");
 		this.maxQuantityDropped = 1;
+		this.isToxic = isToxic;
 		this.setSoundType(SoundType.STONE);
 		this.setHarvestLevel("pickaxe", blockLevel);
 		this.setUnlocalizedName(MMetallurgy.MOD_ID + "." + name + ".ore");
@@ -54,6 +59,17 @@ public class OreBlock extends MalisisBlock {
 
 	public void setMaxQuantityDropped(int maxQuantityDropped) {
 		this.maxQuantityDropped = maxQuantityDropped;
+	}
+
+	@Override
+	public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {
+		super.onBlockClicked(worldIn, pos, playerIn);
+		if (this.isToxic) {
+			if (playerIn.getHealth() <= 0.5f) playerIn.setHealth(0.0f);
+			playerIn.addPotionEffect(new PotionEffect(MobEffects.POISON, 20 * 10, 2));
+			playerIn.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 20 * 10, 2));
+			playerIn.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 20 * 10, 2));
+		}
 	}
 }
 
