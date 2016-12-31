@@ -1,21 +1,9 @@
 [
   {
-    "modid": "mfarm",
-    "name": "mFarm",
-    "description": "",
-    "version": "1.0.0",
-    "credits": "",
-    "mcversion": "1.10.2",
-    "url": "",
-    "updateUrl": "",
-    "authorList": [
-      "SirSavary"
-    ],
-    "logoFile": "",
-    "parent": "",
-    "screenshots": [],
-    "dependencies": [
-      "MinecraftForge"
-    ]
+    "modid": "${modid}",
+    "name": "${name}",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "authorList": "${authorList}"
   }
 ]

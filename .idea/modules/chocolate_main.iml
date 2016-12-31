@@ -7,20 +7,21 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: :Ambience 1.1.0:" level="project" />
+    <orderEntry type="module" module-name="chocolate_api" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/compileDummy.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/Ambience 1.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Gradle: :Ambience 1.1.0:" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/Ambience 1.1.0.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/compileDummy.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -35,13 +36,13 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="chocolate_api" />
     <orderEntry type="module" module-name="mcore_main" />
     <orderEntry type="module" module-name="mclimate_main" />
     <orderEntry type="module" module-name="mfish_main" />
     <orderEntry type="module" module-name="mfarm_main" />
     <orderEntry type="module" module-name="mmetallurgy_main" />
     <orderEntry type="module" module-name="mciv_main" />
+    <orderEntry type="module" module-name="mpower_main" />
     <orderEntry type="library" name="Gradle: org.spongepowered:mixin:0.6.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: com.github.Ordinastie:MalisisCore:1.11-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: com.typesafe:config:1.3.1" level="project" />

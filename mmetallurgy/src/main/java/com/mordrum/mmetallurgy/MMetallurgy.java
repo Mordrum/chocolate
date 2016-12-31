@@ -22,14 +22,16 @@ import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Enumeration;
 
 @Mod(modid = MMetallurgy.MOD_ID, name = MMetallurgy.MOD_NAME, version = MMetallurgy.VERSION, dependencies = "required-after:malisiscore")
 public class MMetallurgy {
 	public static final String MOD_ID = "mmetallurgy";
-	static final String MOD_NAME = "MMetallurgy";
-	static final String VERSION = "1.1.1";
+	static final String MOD_NAME = "mMetallurgy";
+	static final String VERSION = "$VERSION";
 	public static final Gson gson = new Gson();
 
 	// Creative tabs
@@ -59,6 +61,15 @@ public class MMetallurgy {
 			}
 		}
 		config = ConfigFactory.parseFile(event.getSuggestedConfigurationFile());
+
+		try {
+			Enumeration<URL> resources = MMetallurgy.class.getClassLoader().getResources("assets");
+			while (resources.hasMoreElements()) {
+				System.out.println(resources.nextElement());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		MinecraftForge.EVENT_BUS.register(this);
 		new OreGenEventHandler();

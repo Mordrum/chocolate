@@ -8,6 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="chocolate_main" />
+    <orderEntry type="module" module-name="chocolate_api" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -17,7 +19,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="chocolate_main" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -27,7 +28,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="chocolate_api" />
     <orderEntry type="library" name="Gradle: :Ambience 1.1.0:" level="project" />
     <orderEntry type="module-library">
       <library>
@@ -44,6 +44,7 @@
     <orderEntry type="module" module-name="mfarm_main" />
     <orderEntry type="module" module-name="mmetallurgy_main" />
     <orderEntry type="module" module-name="mciv_main" />
+    <orderEntry type="module" module-name="mpower_main" />
     <orderEntry type="library" name="Gradle: org.spongepowered:mixin:0.6.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: com.github.Ordinastie:MalisisCore:1.11-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: com.typesafe:config:1.3.1" level="project" />

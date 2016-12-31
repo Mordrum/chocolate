@@ -8,17 +8,10 @@ configurations {
 dependencies {
     compile name: 'Ambience 1.1.0'
 
-    // These 5 dependencies are defined in the main config, but here we shade them
-    shade('org.spongepowered:mixin:0.6.1-SNAPSHOT') {
-        exclude module: 'launchwrapper'
-        exclude module: 'guava'
-    }
     shade 'com.typesafe:config:1.3.1'
     shade 'com.mashape.unirest:unirest-java:1.4.9'
     shade 'org.apache.commons:commons-math3:3.6.1'
     shade "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-//    shade 'com.github.sirsavary:Realistic-Terrain-Generation:1.11-dev-SNAPSHOT'
 }
 
 jar {

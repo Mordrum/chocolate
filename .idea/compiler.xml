@@ -32,6 +32,9 @@
       <module name="mmetallurgy_api" target="1.8" />
       <module name="mmetallurgy_main" target="1.8" />
       <module name="mmetallurgy_test" target="1.8" />
+      <module name="mpower_api" target="1.8" />
+      <module name="mpower_main" target="1.8" />
+      <module name="mpower_test" target="1.8" />
       <module name="mskill_api" target="1.8" />
       <module name="mskill_main" target="1.8" />
       <module name="mskill_test" target="1.8" />

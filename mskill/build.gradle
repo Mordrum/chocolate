@@ -1,1 +1,1 @@
-version '1.0-SNAPSHOT'
+project.version = "1.0.0"

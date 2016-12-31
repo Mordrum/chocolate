@@ -8,9 +8,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = MFish.MOD_ID, name = MFish.MOD_NAME, version = MFish.MOD_VERSION, dependencies = "required-after:malisiscore;required-after:mcore")
 public class MFish {
-    public static final String MOD_ID = "mfish";
     public static final String MOD_NAME = "mFish";
-    public static final String MOD_VERSION = "1.0";
+    public static final String MOD_ID = "mfish";
+    public static final String MOD_VERSION = "$VERSION";
 
     @Mod.Instance(MOD_ID)
     private static MFish instance;

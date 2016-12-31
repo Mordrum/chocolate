@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class MFarm {
     public static final String MOD_ID = "mfarm";
     public static final String MOD_NAME = "mFarm";
-    public static final String MOD_VERSION = "1.0";
+    public static final String MOD_VERSION = "$VERSION";
 
     @Mod.Instance(MOD_ID)
     private static MFarm instance;

@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 public class MCiv {
 	public static final String MOD_ID = "mciv";
 	public static final String MOD_NAME = "mCiv";
-	public static final String MOD_VERSION = "1.0";
+	public static final String MOD_VERSION = "$VERSION";
 
 	@Mod.Instance(MOD_ID)
 	private static MCiv instance;
