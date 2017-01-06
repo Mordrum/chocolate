@@ -23,6 +23,8 @@ class CreatureExplosionHealListener {
 
     @SubscribeEvent
     fun onCreatureExplode(event: ExplosionEvent) {
+        if (event.world.isRemote) return
+
         val explosion = event.explosion
         if (explosion.explosivePlacedBy is EntityCreature) {
             // Create the map of block positions and former states before the explosion
@@ -49,8 +51,8 @@ class CreatureExplosionHealListener {
 
     @SubscribeEvent
     fun onWorldTick(event: TickEvent.WorldTickEvent) {
-        // Only check once every second
-        if (System.currentTimeMillis() - this.timeSinceLastCheck < 1000) return
+        // Only check if this is the server thread + once every second
+        if (event.world.isRemote || System.currentTimeMillis() - this.timeSinceLastCheck < 1000) return
         this.timeSinceLastCheck = System.currentTimeMillis()
 
         val worldDimension = event.world.provider.dimension
