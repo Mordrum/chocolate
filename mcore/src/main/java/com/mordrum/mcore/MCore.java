@@ -29,6 +29,8 @@ public class MCore {
 	public static final String API_URL;
 
 	static {
+		FluidRegistry.enableUniversalBucket();
+
 		String environment = System.getProperty("environment");
 		if ((environment != null && environment.equalsIgnoreCase("development"))) {
 			API_URL = "http://localhost:8080";
@@ -44,10 +46,6 @@ public class MCore {
 
 	@SidedProxy(clientSide = "com.mordrum.mcore.client.ClientProxy", serverSide = "com.mordrum.mcore.common.CommonProxy")
 	public static CommonProxy proxy;
-
-	static {
-		FluidRegistry.enableUniversalBucket();
-	}
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
