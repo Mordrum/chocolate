@@ -8,6 +8,7 @@ public class CommonProxy {
     public void onPreInit() {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new CreatureExplosionHealListener());
+        MinecraftForge.EVENT_BUS.register(new BedSpawnListener());
     }
 
     public void onLoad() {
