@@ -1,6 +1,11 @@
 package com.mordrum.mdeco.common
 
+import com.mordrum.mdeco.MDeco
 import com.mordrum.mdeco.common.block.Cask
+import com.mordrum.mdeco.common.networking.BeginFermentationMessage
+import com.mordrum.mdeco.common.networking.BeginFermentationMessageHandler
+import com.mordrum.mdeco.common.networking.CaskStateChangedMessage
+import com.mordrum.mdeco.common.networking.CaskStateChangedMessageHandler
 import com.mordrum.mdeco.common.recipe.CaskRecipe
 import com.mordrum.mdeco.common.tileentities.CaskTileEntity
 import net.minecraft.block.Block
@@ -9,11 +14,22 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
+import net.minecraftforge.fml.common.network.NetworkRegistry
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
 import net.minecraftforge.fml.common.registry.GameRegistry
+import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.oredict.OreDictionary
 
 open class CommonProxy {
+    companion object {
+        val NETWORK_WRAPPER: SimpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MDeco.MOD_ID)
+        var DISCRIMINATOR = 0
+    }
+
     fun preInit(event: FMLPreInitializationEvent) {
+        NETWORK_WRAPPER.registerMessage(BeginFermentationMessageHandler::class.java, BeginFermentationMessage::class.java, DISCRIMINATOR++, Side.SERVER)
+        NETWORK_WRAPPER.registerMessage(CaskStateChangedMessageHandler::class.java, CaskStateChangedMessage::class.java, DISCRIMINATOR++, Side.CLIENT)
+
         val cask = Cask()
         cask.register()
         GameRegistry.registerTileEntity(CaskTileEntity::class.java, "caskTileEntity")
