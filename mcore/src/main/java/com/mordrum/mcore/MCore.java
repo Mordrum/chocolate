@@ -35,7 +35,7 @@ public class MCore {
 		if ((environment != null && environment.equalsIgnoreCase("development"))) {
 			API_URL = "http://localhost:8080";
 		} else {
-			API_URL = "http://api.mordrum.com";
+			API_URL = "https://api.mordrum.com";
 		}
 	}
 
