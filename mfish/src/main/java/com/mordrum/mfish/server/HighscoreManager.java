@@ -10,8 +10,6 @@ import com.mordrum.mfish.common.Fish;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
@@ -26,11 +24,11 @@ class HighscoreManager {
         Unirest.post(MCore.API_URL + "/fishing")
                 .header("accept", "application/json")
                 .header("Content-Type", "application/json")
-                .body(new JSONObject().put("player", player.getUniqueID()).put("fish", fish.getMetadata()).put("weight", weight))
+                .body(new JSONObject().put("uuid", player.getUniqueID()).put("fish", fish.getMetadata()).put("weight", weight))
                 .asJsonAsync(new Callback<JsonNode>() {
                     @Override
                     public void completed(HttpResponse<JsonNode> response) {
-                        if (response.getBody().getObject().getBoolean("isHighscore")) {
+                        if (response.getBody().getObject().getBoolean("is_highscore")) {
                             sb.setLength(0);
                             sb.append(player.getName())
                                     .append(" just caught a record breaking ")
