@@ -79,6 +79,7 @@ public class ClientAPIHelper {
 
 	public static void getPlayerCivilization(UUID player, Consumer<Optional<Civilization>> consumer) {
 		Unirest.get(MCore.API_URL + "/players/" + player.toString())
+				.queryString("with", "civilization")
 				.asJsonAsync(new Callback<JsonNode>() {
 					@Override
 					public void completed(HttpResponse<JsonNode> response) {
