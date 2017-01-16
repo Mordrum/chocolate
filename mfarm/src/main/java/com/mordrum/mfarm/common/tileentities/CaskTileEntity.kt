@@ -19,6 +19,7 @@ import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.ITickable
 import net.minecraft.util.NonNullList
 import net.minecraft.util.text.ITextComponent
+import net.minecraftforge.fml.common.FMLCommonHandler
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
@@ -121,7 +122,9 @@ class CaskTileEntity : TileEntity(), IInventoryProvider.IDirectInventoryProvider
 
     override fun onDataPacket(net: NetworkManager, pkt: SPacketUpdateTileEntity) {
         this.readFromNBT(pkt.nbtCompound)
-        TileEntityUtils.updateGui(this)
+        if (FMLCommonHandler.instance().effectiveSide == Side.CLIENT) {
+            TileEntityUtils.updateGui(this)
+        }
     }
 
     override fun update() {
