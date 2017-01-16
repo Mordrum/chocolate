@@ -151,7 +151,9 @@ class CaskTileEntity : TileEntity(), IInventoryProvider.IDirectInventoryProvider
         this.state = CaskState.FERMENTING
         this.itemsFermenting = this.inventory.itemStackList
         this.inventory.itemStackList.clear()
-        TileEntityUtils.updateGui(this)
+        if (FMLCommonHandler.instance().effectiveSide == Side.CLIENT) {
+            TileEntityUtils.updateGui(this)
+        }
     }
 }
 
