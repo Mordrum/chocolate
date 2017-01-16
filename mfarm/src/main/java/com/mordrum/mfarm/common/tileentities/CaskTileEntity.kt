@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTUtil
+import net.minecraft.network.EnumPacketDirection
 import net.minecraft.network.NetworkManager
 import net.minecraft.network.play.server.SPacketUpdateTileEntity
 import net.minecraft.tileentity.TileEntity
@@ -120,9 +121,9 @@ class CaskTileEntity : TileEntity(), IInventoryProvider.IDirectInventoryProvider
         return SPacketUpdateTileEntity(this.pos, 0, this.serializeNBT())
     }
 
-    override fun onDataPacket(net: NetworkManager, pkt: SPacketUpdateTileEntity) {
+    override fun onDataPacket(networkManager: NetworkManager, pkt: SPacketUpdateTileEntity) {
         this.readFromNBT(pkt.nbtCompound)
-        if (FMLCommonHandler.instance().effectiveSide == Side.CLIENT) {
+        if (networkManager.direction == EnumPacketDirection.CLIENTBOUND) {
             TileEntityUtils.updateGui(this)
         }
     }
@@ -151,9 +152,6 @@ class CaskTileEntity : TileEntity(), IInventoryProvider.IDirectInventoryProvider
         this.state = CaskState.FERMENTING
         this.itemsFermenting = this.inventory.itemStackList
         this.inventory.itemStackList.clear()
-        if (FMLCommonHandler.instance().effectiveSide == Side.CLIENT) {
-            TileEntityUtils.updateGui(this)
-        }
     }
 }
 
