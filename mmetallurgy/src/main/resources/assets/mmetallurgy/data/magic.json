@@ -4,13 +4,13 @@
     "type": "Ore",
     "isToxic": true,
     "blockLevel": 4,
-    "hasBlocks": false
+    "hasBlocks": true
   },
   {
     "name": "Grifonium",
     "type": "Ore",
     "isToxic": true,
     "blockLevel": 4,
-    "hasBlocks": false
+    "hasBlocks": true
   }
 ]
