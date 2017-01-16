@@ -58,6 +58,7 @@ class CaskGui(container: MalisisInventoryContainer, val tileEntity: CaskTileEnti
                 this.timerLabel!!.text = "Fermentation Complete"
             } else {
                 val calendar = Calendar.getInstance()
+                calendar.timeZone = TimeZone.getTimeZone("UTC")
                 calendar.timeInMillis = timeRemaining
                 this.timerLabel!!.text = "${calendar.get(Calendar.HOUR_OF_DAY)}h ${calendar.get(Calendar.MINUTE)}m ${calendar.get(Calendar.SECOND)}s remaining"
             }
