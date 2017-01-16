@@ -23,6 +23,9 @@
       <module name="mcore_api" target="1.8" />
       <module name="mcore_main" target="1.8" />
       <module name="mcore_test" target="1.8" />
+      <module name="mdeco_api" target="1.8" />
+      <module name="mdeco_main" target="1.8" />
+      <module name="mdeco_test" target="1.8" />
       <module name="mfarm_api" target="1.8" />
       <module name="mfarm_main" target="1.8" />
       <module name="mfarm_test" target="1.8" />

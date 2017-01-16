@@ -18,6 +18,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcore/mcore_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mcore/mcore_api.iml" group="mcore" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcore/mcore_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mcore/mcore_main.iml" group="mcore" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcore/mcore_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mcore/mcore_test.iml" group="mcore" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mdeco/mdeco.iml" filepath="$PROJECT_DIR$/.idea/modules/mdeco/mdeco.iml" group="mdeco" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mdeco/mdeco_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mdeco/mdeco_api.iml" group="mdeco" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mdeco/mdeco_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mdeco/mdeco_main.iml" group="mdeco" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mdeco/mdeco_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mdeco/mdeco_test.iml" group="mdeco" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfarm/mfarm.iml" filepath="$PROJECT_DIR$/.idea/modules/mfarm/mfarm.iml" group="mfarm" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfarm/mfarm_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mfarm/mfarm_api.iml" group="mfarm" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfarm/mfarm_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mfarm/mfarm_main.iml" group="mfarm" />
@@ -27,9 +31,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish_main.iml" group="mfish" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish_test.iml" group="mfish" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy.iml" filepath="$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy.iml" group="mmetallurgy" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_api.iml" group="mmetallurgy" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_main.iml" group="mmetallurgy" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_test.iml" group="mmetallurgy" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mpower/mpower.iml" filepath="$PROJECT_DIR$/.idea/modules/mpower/mpower.iml" group="mpower" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mpower/mpower_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mpower/mpower_api.iml" group="mpower" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mpower/mpower_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mpower/mpower_main.iml" group="mpower" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mpower/mpower_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mpower/mpower_test.iml" group="mpower" />

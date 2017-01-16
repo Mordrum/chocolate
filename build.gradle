@@ -33,9 +33,9 @@ allprojects {
     sourceCompatibility = targetCompatibility = "1.8"
 
     minecraft {
-        version = "1.11-13.19.1.2194"
+        version = "1.11.2-13.20.0.2214"
         runDir = "run"
-        mappings = "snapshot_20161209"
+        mappings = 'snapshot_20170105'
         makeObfSourceJar = false
     }
 
@@ -93,12 +93,12 @@ subprojects {
 
         // Replace special strings in our code with values we've set in our build scripts
         minecraft {
-            replace('%' + project.name.toLowerCase() + '$VERSION', project.version)
+            replace('$VERSION', project.version)
         }
 
         dependencies {
             testCompile 'junit:junit:4.12'
-            compile('org.spongepowered:mixin:0.6.1-SNAPSHOT') {
+            compile('org.spongepowered:mixin:0.6.4-SNAPSHOT') {
                 exclude module: 'launchwrapper'
                 exclude module: 'guava'
             }

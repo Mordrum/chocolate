@@ -4,13 +4,14 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityCreature
 import net.minecraft.init.Blocks
 import net.minecraft.util.math.BlockPos
+import net.minecraftforge.common.DimensionManager
 import net.minecraftforge.event.world.ExplosionEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 import java.util.*
 
 class CreatureExplosionHealListener {
-    val snapshotMap: MutableMap<String, MutableList<ExplosionSnapshot>>
+    val snapshotMap: MutableMap<Int, MutableList<ExplosionSnapshot>>
     val timeToHeal: Long
     var timeSinceLastCheck: Long
 
@@ -22,6 +23,8 @@ class CreatureExplosionHealListener {
 
     @SubscribeEvent
     fun onCreatureExplode(event: ExplosionEvent) {
+        if (event.world.isRemote) return
+
         val explosion = event.explosion
         if (explosion.explosivePlacedBy is EntityCreature) {
             // Create the map of block positions and former states before the explosion
@@ -39,21 +42,21 @@ class CreatureExplosionHealListener {
             explosion.clearAffectedBlockPositions()
 
             // Make sure the current world has been inserted into the damage map
-            val worldName = event.world.worldInfo.worldName
-            if (!snapshotMap.containsKey(worldName)) snapshotMap[worldName] = ArrayList()
+            val worldDimension = event.world.provider.dimension
+            if (!snapshotMap.containsKey(worldDimension)) snapshotMap[worldDimension] = ArrayList()
 
-            snapshotMap[worldName]?.add(ExplosionSnapshot(System.currentTimeMillis(), blockStateMap))
+            snapshotMap[worldDimension]?.add(ExplosionSnapshot(System.currentTimeMillis(), blockStateMap))
         }
     }
 
     @SubscribeEvent
     fun onWorldTick(event: TickEvent.WorldTickEvent) {
-        // Only check once every second
-        if (System.currentTimeMillis() - this.timeSinceLastCheck < 1000) return
+        // Only check if this is the server thread + once every second
+        if (event.world.isRemote || System.currentTimeMillis() - this.timeSinceLastCheck < 1000) return
         this.timeSinceLastCheck = System.currentTimeMillis()
 
-        val worldName = event.world.worldInfo.worldName
-        val snapshots = snapshotMap[worldName] ?: return
+        val worldDimension = event.world.provider.dimension
+        val snapshots = snapshotMap[worldDimension] ?: return
         val time = System.currentTimeMillis()
         val toRemove = ArrayList<ExplosionSnapshot>()
 
@@ -77,6 +80,21 @@ class CreatureExplosionHealListener {
                     }
                 }
         snapshots.removeAll(toRemove)
+    }
+
+    @SubscribeEvent
+    fun onServerStopping(event: ServerStoppingEvent) {
+        for (world in DimensionManager.getWorlds()) {
+            val snapshots = snapshotMap[world.provider.dimension] ?: continue
+            snapshots.forEach { snapshot ->
+                for ((pos) in snapshot.stateMap) {
+                    if (world.getBlockState(pos) == Blocks.AIR.defaultState) {
+                        world.setBlockState(pos, snapshot.stateMap[pos])
+                    }
+                }
+            }
+            snapshots.clear()
+        }
     }
 
     class ExplosionSnapshot(val time: Long, val stateMap: MutableMap<BlockPos, IBlockState>)

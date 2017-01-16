@@ -31,6 +31,11 @@ public class FishingLootGenerator {
         Biome biome = fishHook.getEntityWorld().getBiome(fishHook.getPosition());
 
         Set<Fish> fishForBiome = Fish.getFishForBiome(biome);
+
+		if (fishForBiome.isEmpty()) {
+			return new ItemStack(Blocks.COBBLESTONE);
+		}
+
         int rollMax = fishForBiome.stream().mapToInt(Fish::getRarity).sum();
 
         Random random = new Random();

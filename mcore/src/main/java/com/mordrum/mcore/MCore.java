@@ -1,11 +1,13 @@
 package com.mordrum.mcore;
 
 import com.mordrum.mcore.common.CommonProxy;
+import com.mordrum.mcore.common.ServerStoppingEvent;
 import com.mordrum.mcore.common.network.NetworkHelper;
 import com.mordrum.mcore.common.network.PartialBlockPacket;
 import com.mordrum.mcore.common.network.PartialBlockRemovalPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -13,6 +15,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 
 /**
  * FML superclass causing all of the things to happen. Registers everything, causes the Mod parts
@@ -26,11 +29,13 @@ public class MCore {
 	public static final String API_URL;
 
 	static {
+		FluidRegistry.enableUniversalBucket();
+
 		String environment = System.getProperty("environment");
 		if ((environment != null && environment.equalsIgnoreCase("development"))) {
 			API_URL = "http://localhost:8080";
 		} else {
-			API_URL = "http://api.mordrum.com";
+			API_URL = "https://api.mordrum.com";
 		}
 	}
 
@@ -42,10 +47,6 @@ public class MCore {
 	@SidedProxy(clientSide = "com.mordrum.mcore.client.ClientProxy", serverSide = "com.mordrum.mcore.common.CommonProxy")
 	public static CommonProxy proxy;
 
-	static {
-		FluidRegistry.enableUniversalBucket();
-	}
-
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
 		proxy.onPreInit();
@@ -55,6 +56,11 @@ public class MCore {
 	@EventHandler
 	public void load(FMLInitializationEvent evt) {
 		proxy.onLoad();
+	}
+
+	@EventHandler
+	public void serverStopping(FMLServerStoppingEvent event) {
+		MinecraftForge.EVENT_BUS.post(new ServerStoppingEvent(event));
 	}
 
 	public static MCore instance() {
