@@ -32,16 +32,15 @@ public class PlayerMoveListener {
 		if (chunkPosMap.containsKey(player.getUniqueID())) {
 			Tuple2i previousChunkPos = chunkPosMap.get(player.getUniqueID());
 			if (previousChunkPos.getX() != currentChunkX || previousChunkPos.getY() != currentChunkZ) {
-				if (CommonProxy.getChunkCache().containsKey(currentChunkX)&& CommonProxy.getChunkCache().get(currentChunkX).containsKey(currentChunkZ)) {
-					long civId = CommonProxy.getChunkCache().get(currentChunkX).get(currentChunkZ);
-					System.out.println("Player passing through new chunk, claimed by " + civId);
+				if (CommonProxy.Companion.getChunkCache().containsKey(currentChunkX)&& CommonProxy.Companion.getChunkCache().get(currentChunkX).containsKey(currentChunkZ)) {
+					long civId = CommonProxy.Companion.getChunkCache().get(currentChunkX).get(currentChunkZ);
 					if (lastCiv != civId) {
-						if (CommonProxy.getCivilizationMap().containsKey(civId)) {
+						if (CommonProxy.Companion.getCivilizationMap().containsKey(civId)) {
 							lastCiv = civId;
-							player.sendMessage(new TextComponentString(ChatColor.YELLOW + "~" + CommonProxy.getCivilizationMap().get(civId).getName() + "~"));
+							player.sendMessage(new TextComponentString(ChatColor.YELLOW + "~" + CommonProxy.Companion.getCivilizationMap().get(civId).getName() + "~"));
 						} else {
 							System.out.println("Civilization sync issue, refreshing caches");
-							CommonProxy.populateCaches();
+							CommonProxy.Companion.populateCaches();
 						}
 					}
 				} else {
@@ -49,7 +48,6 @@ public class PlayerMoveListener {
 						lastCiv = -1;
 						player.sendMessage(new TextComponentString(ChatColor.DARK_GREEN + "~Wilderness~"));
 					}
-					System.out.println("Player passing through new, unclaimed chunk");
 				}
 			}
 		}
