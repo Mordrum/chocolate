@@ -1,9 +1,8 @@
 package com.mordrum.mciv.client.gui;
 
 import com.google.common.eventbus.Subscribe;
-import com.mordrum.mciv.common.Civilization;
 import com.mordrum.mciv.common.CommonProxy;
-import com.mordrum.mciv.common.networking.ClientAPIHelper;
+import com.mordrum.mciv.common.models.Civilization;
 import com.mordrum.mciv.common.networking.messages.CreateCivMessage;
 import com.mordrum.mcore.client.gui.ChatColor;
 import com.mordrum.mcore.client.gui.MordrumGui;
@@ -17,7 +16,6 @@ import net.minecraft.block.BlockBanner;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,7 +23,6 @@ import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 public class CreateCivScreen extends MordrumGui {
@@ -58,7 +55,7 @@ public class CreateCivScreen extends MordrumGui {
 		Optional<String> bannerFromRayTrace = getBannerFromRayTrace();
 		if (bannerFromRayTrace.isPresent()) {
 			bannerUnique = true;
-			for (Civilization civilization : CommonProxy.getCivilizationMap().values()) {
+			for (Civilization civilization : CommonProxy.Companion.getCivilizationMap().values()) {
 				if (civilization.getBanner().equalsIgnoreCase(bannerFromRayTrace.get())) {
 					bannerUnique = false;
 					break;
@@ -137,7 +134,7 @@ public class CreateCivScreen extends MordrumGui {
 				Minecraft.getMinecraft().player.sendMessage(new TextComponentString("You must supply a civilization name"));
 			} else {
 				String bannerId = getBannerFromRayTrace().orElse("");
-				CommonProxy.NETWORK_WRAPPER.sendToServer(new CreateCivMessage.Request(bannerId, civName));
+				CommonProxy.Companion.getNETWORK_WRAPPER().sendToServer(new CreateCivMessage.Request(bannerId, civName));
 				this.close();
 			}
 		}
@@ -172,7 +169,7 @@ public class CreateCivScreen extends MordrumGui {
 
 		for (int i = 0; i < player.inventory.mainInventory.size(); i++) {
 			ItemStack itemStack = player.inventory.getStackInSlot(i);
-			if (itemStack != null && itemStack.getItem().equals(Item.getItemFromBlock(Blocks.GOLD_BLOCK))) {
+			if (itemStack.getItem().equals(Item.getItemFromBlock(Blocks.GOLD_BLOCK))) {
 				foundSoFar += itemStack.getCount();
 			}
 		}

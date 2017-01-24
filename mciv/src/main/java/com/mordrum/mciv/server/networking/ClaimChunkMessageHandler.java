@@ -1,4 +1,4 @@
-package com.mordrum.mciv.common.networking.handlers;
+package com.mordrum.mciv.server.networking;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -46,7 +46,7 @@ public class ClaimChunkMessageHandler implements IMessageHandler<ChunkClaimMessa
 						if (response.getStatus() == 200) {
 							playerEntity.sendMessage(new TextComponentString("Chunk claimed successfully"));
 							int civilizationId = response.getBody().getObject().getJSONObject("civilization").getInt("id");
-							CommonProxy.NETWORK_WRAPPER.sendToAll(new ChunkSyncMessage(chunkX, chunkZ, civilizationId));
+							CommonProxy.Companion.getNETWORK_WRAPPER().sendToAll(new ChunkSyncMessage(chunkX, chunkZ, civilizationId));
 						} else {
 							logError("POST", "/chunks", response);
 						}

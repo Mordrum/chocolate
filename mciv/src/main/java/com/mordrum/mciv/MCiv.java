@@ -1,9 +1,6 @@
 package com.mordrum.mciv;
 
-import com.mordrum.mciv.client.ClientProxy;
 import com.mordrum.mciv.common.CommonProxy;
-import com.mordrum.mciv.server.ServerProxy;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
