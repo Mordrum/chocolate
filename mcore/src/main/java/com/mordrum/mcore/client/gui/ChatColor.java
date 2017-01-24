@@ -3,6 +3,8 @@
  */
 package com.mordrum.mcore.client.gui;
 
+import org.jetbrains.annotations.NotNull;
+
 public enum ChatColor {
     BLACK('0', 0),
     DARK_BLUE('1', 1),
@@ -69,4 +71,8 @@ public enum ChatColor {
     public boolean isColor() {
         return !this.isFormat && this != RESET;
     }
+
+	public String plus(@NotNull String s) {
+		return this.toString + s;
+	}
 }
