@@ -45,14 +45,29 @@ object ServerAPIHelper: APIHelper() {
 
     fun addPlayerToCivilization(player: UUID, civilizationId: Long, consumer: BiConsumer<Exception?, Civilization>) {
         val body = JSONObject()
-                .put("players", JSONArray().put(player))
-        Unirest.patch(MCore.API_URL  + "/civilizations/" + civilizationId)
+                .put("uuid", player)
+        Unirest.patch(MCore.API_URL  + "/civilizations/" + civilizationId + "/addplayer")
                 .body(body)
                 .asJsonAsync(object : SafeCallback<Civilization>(consumer) {
                     override fun onComplete(body: JsonNode) {
                         if (this.response.status == 200) {
                             val civilization = gson.fromJson(body.toString(), Civilization::class.java)
                             consumer.accept(null, civilization)
+                        } else {
+                            consumer.accept(Exception(body.`object`.getString("message")), null)
+                        }
+                    }
+                })
+    }
+
+    fun updateCivilization(civilization: Civilization, consumer: BiConsumer<Exception?, Civilization>) {
+        val body = JSONObject(gson.toJson(civilization))
+        Unirest.patch(MCore.API_URL  + "/civilizations/" + civilization.id)
+                .body(body)
+                .asJsonAsync(object : SafeCallback<Civilization>(consumer) {
+                    override fun onComplete(body: JsonNode) {
+                        if (this.response.status == 200) {
+                            consumer.accept(null, gson.fromJson(body.toString(), Civilization::class.java))
                         } else {
                             consumer.accept(Exception(body.`object`.getString("message")), null)
                         }

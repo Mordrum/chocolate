@@ -10,6 +10,7 @@ import com.mordrum.mciv.common.models.Civilization
 import com.mordrum.mciv.server.networking.ClaimChunkMessageHandler
 import com.mordrum.mciv.server.networking.CreateCivMessageHandler
 import com.mordrum.mciv.common.networking.messages.*
+import com.mordrum.mciv.server.networking.CivilizationUpdateMessageHandler
 import com.mordrum.mciv.server.networking.InviteHandler
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
@@ -40,6 +41,8 @@ open class CommonProxy {
 
         registerMessageHandler(InviteRequestHandler::class, InviteRequestMessage.Request::class, Side.CLIENT)
         registerMessageHandler(InviteHandler.ResponseHandler::class, InviteRequestMessage.Response::class, Side.SERVER)
+
+        registerMessageHandler(CivilizationUpdateMessageHandler::class, CivilizationUpdateMessage::class, Side.SERVER)
     }
 
     open fun onInit(event: FMLInitializationEvent) {

@@ -3,12 +3,17 @@ package com.mordrum.mciv.client.gui
 import com.google.common.eventbus.Subscribe
 import com.mordrum.mciv.common.CommonProxy
 import com.mordrum.mciv.common.models.Civilization
+import com.mordrum.mciv.common.networking.messages.CivilizationUpdateMessage
 import com.mordrum.mciv.common.networking.messages.InvitePlayerMessage
+import com.mordrum.mcore.client.gui.ChatColor
 import com.mordrum.mcore.client.gui.ChatColor.BLACK
 import com.mordrum.mcore.client.gui.MordrumGui
+import com.mordrum.mcore.client.util.getBottom
 import net.malisis.core.client.gui.Anchor
+import net.malisis.core.client.gui.component.UIComponent
 import net.malisis.core.client.gui.component.container.UIBackgroundContainer
 import net.malisis.core.client.gui.component.container.UIContainer
+import net.malisis.core.client.gui.component.control.UIScrollBar
 import net.malisis.core.client.gui.component.decoration.UILabel
 import net.malisis.core.client.gui.component.interaction.UIButton
 import net.malisis.core.client.gui.component.interaction.UITextField
@@ -17,7 +22,8 @@ import java.util.*
 
 class CivInfoScreen(val civilization: Civilization) : MordrumGui() {
     val panels = mapOf(Pair("info", ::InfoPanel), Pair("invite", ::InvitePanel), Pair("edit", ::EditPanel))
-    var currentPanel: UIContainer<*> = panels["info"]!!.invoke(this)
+//    var currentPanel: UIContainer<*> = panels["info"]!!.invoke(this)
+    var currentPanel: UIBackgroundContainer = panels["info"]!!.invoke(this)
 
     override fun construct() {
         // Name of the civilization
@@ -31,7 +37,7 @@ class CivInfoScreen(val civilization: Civilization) : MordrumGui() {
             init {
                 this.setBackgroundAlpha(0)
                 this.anchor = Anchor.CENTER or Anchor.TOP
-                this.setSize(50 + 150, 160)
+                this.setSize(50 + 150 + 10, 160)
                 this.setPosition(0, getPaddedY(nameLabel, 12))
 
                 buttonsContainer.setPosition(0, 0)
@@ -41,6 +47,12 @@ class CivInfoScreen(val civilization: Civilization) : MordrumGui() {
                 currentPanel.setPosition(50, 0)
                 currentPanel.setSize(150, 160)
                 this.add(currentPanel)
+
+                if (currentPanel.contentHeight > currentPanel.height) {
+                    val uiScrollBar = UIScrollBar(this.gui, currentPanel, UIScrollBar.Type.VERTICAL)
+//                    this.add(uiScrollBar)
+//                    uiScrollBar.parent = currentPanel
+                }
             }
         })
 
@@ -135,13 +147,105 @@ class CivInfoScreen(val civilization: Civilization) : MordrumGui() {
         }
     }
 
-    class EditPanel(gui: CivInfoScreen) : UIBackgroundContainer(gui) {
+    class EditPanel(val gui: CivInfoScreen) : UIBackgroundContainer(gui) {
+        val civilizationNameField: UITextField
+        val welcomeMessageField: UITextField
+        val motdField: UITextField
+        val tagField: UITextField
+        val descriptionField: UITextField
+        var primaryColor = gui.civilization.primaryColor
+        var secondaryColor = gui.civilization.secondaryColor
+
         init {
             this.setBackgroundAlpha(100)
 
-            val playerNameField = UITextField(gui, "", false).setPosition(2, 2)
+            val civilizationNameLabel = UILabel(gui, BLACK + "Civilization Name")
+                    .setPosition(2, 2)
+            civilizationNameField = UITextField(gui, gui.civilization.name, false)
+                    .setSize(this.width - 10 - 4, 12)
+                    .setPosition(2, civilizationNameLabel.getBottom() + 2)
+            this.add(civilizationNameLabel, civilizationNameField)
 
-            this.add(playerNameField)
+            val welcomeMessageLabel = UILabel(gui, BLACK + "Welcome Message")
+                    .setPosition(2, civilizationNameField.getBottom() + 2)
+            welcomeMessageField = UITextField(gui, gui.civilization.welcomeMessage, false)
+                    .setSize(this.width - 10 - 4, 12)
+                    .setPosition(2, welcomeMessageLabel.getBottom() + 2)
+            this.add(welcomeMessageLabel, welcomeMessageField)
+
+            val motdLabel = UILabel(gui, BLACK + "Message of the Day")
+                    .setPosition(2, welcomeMessageField.getBottom() + 2)
+            motdField = UITextField(gui, gui.civilization.motd, false)
+                    .setSize(this.width - 10 - 4, 12)
+                    .setPosition(2, motdLabel.getBottom() + 2)
+            this.add(motdLabel, motdField)
+
+            val tagLabel = UILabel(gui, BLACK + "Civilization Tag")
+                    .setPosition(2, motdField.getBottom() + 2)
+            tagField = UITextField(gui, gui.civilization.tag, false)
+                    .setSize(this.width - 10 - 4, 12)
+                    .setPosition(2, tagLabel.getBottom() + 2)
+            this.add(tagLabel, tagField)
+
+            val descriptionLabel = UILabel(gui, BLACK + "Description")
+                    .setPosition(2, tagField.getBottom() + 2)
+            descriptionField = UITextField(gui, gui.civilization.description, true)
+                    .setSize(this.width - 10 - 4, 36)
+                    .setPosition(2, descriptionLabel.getBottom() + 2)
+            this.add(descriptionLabel, descriptionField)
+
+            val primaryColorLabel = UILabel(gui, BLACK + "Primary Color")
+                    .setPosition(2, descriptionField.getBottom() + 2)
+            val primaryColorButton = UIButton(gui, gui.civilization.primaryColor + gui.civilization.primaryColor.name.toLowerCase().capitalize().replace("_", " "))
+                    .register(this)
+                    .setName("primary")
+                    .setAutoSize(false)
+                    .setSize(80, 15)
+                    .setPosition(2, primaryColorLabel.getBottom() + 2)
+            this.add(primaryColorLabel, primaryColorButton)
+
+            val secondaryColorLabel = UILabel(gui, BLACK + "Secondary Color")
+                    .setPosition(2, primaryColorButton.getBottom() + 2)
+            val secondaryColorButton = UIButton(gui, gui.civilization.secondaryColor + gui.civilization.secondaryColor.name.toLowerCase().capitalize().replace("_", " "))
+                    .register(this)
+                    .setName("secondary")
+                    .setAutoSize(false)
+                    .setSize(80, 15)
+                    .setPosition(2, secondaryColorLabel.getBottom() + 2)
+            this.add(secondaryColorLabel, secondaryColorButton)
+
+            val saveButton = UIButton(gui, "Save Changes")
+                    .register(this)
+                    .setName("save")
+                    .setSize(80, 15)
+                    .setPosition(2, secondaryColorButton.getBottom() + 4)
+            this.add(saveButton)
+        }
+
+        @Subscribe
+        fun onButtonClick(event: UIButton.ClickEvent) {
+            val name = event.component.name
+            val colors = ChatColor.values()
+
+            if (name == "primary") {
+                if (primaryColor.ordinal >= 15) primaryColor = colors[0]
+                else primaryColor = colors[primaryColor.ordinal + 1]
+                event.component.text = primaryColor + primaryColor.name.toLowerCase().capitalize().replace("_", " ")
+            } else if (name == "secondary") {
+                if (secondaryColor.ordinal >= 15) secondaryColor = colors[0]
+                else secondaryColor = colors[secondaryColor.ordinal + 1]
+                event.component.text = secondaryColor + secondaryColor.name.toLowerCase().capitalize().replace("_", " ")
+            } else if (name == "save") {
+                gui.civilization.name = civilizationNameField.text
+                gui.civilization.welcomeMessage = welcomeMessageField.text
+                gui.civilization.motd = motdField.text
+                gui.civilization.tag = tagField.text
+                gui.civilization.description = descriptionField.text
+                gui.civilization.primaryColor = primaryColor
+                gui.civilization.secondaryColor = secondaryColor
+                CommonProxy.NETWORK_WRAPPER.sendToServer(CivilizationUpdateMessage(gui.civilization))
+                gui.close()
+            }
         }
     }
 }
