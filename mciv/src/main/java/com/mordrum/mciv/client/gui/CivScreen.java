@@ -37,16 +37,16 @@ public class CivScreen extends MordrumGui {
 							.setAnchor(Anchor.CENTER | Anchor.TOP)
 							.setPosition(0, getPaddedY(titleLabel, 20))
 							.register(this);
-					UIButton join = new UIButton(this, "Join")
-							.setName("civ.join")
-							.setSize(80)
-							.setAnchor(Anchor.CENTER | Anchor.TOP)
-							.setPosition(0, getPaddedY(create))
-							.register(this);
+//					UIButton join = new UIButton(this, "Join")
+//							.setName("civ.join")
+//							.setSize(80)
+//							.setAnchor(Anchor.CENTER | Anchor.TOP)
+//							.setPosition(0, getPaddedY(create))
+//							.register(this);
 
 					this.addToScreen(titleLabel);
 					this.addToScreen(create);
-					this.addToScreen(join);
+//					this.addToScreen(join);
 				} else {
 					// Civilization found, load info screen
 					new CivInfoScreen(player.getCivilization()).display();
