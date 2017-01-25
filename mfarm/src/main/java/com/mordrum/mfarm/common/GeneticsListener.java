@@ -1,31 +1,30 @@
 package com.mordrum.mfarm.common;
 
-import com.mordrum.mfarm.events.EntityBreedEvent;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTPrimitive;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
+import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneticsListener {
 	@SubscribeEvent
-	public void onEntityBreed(EntityBreedEvent entityBreedEvent) {
+	public void onEntityBreed(BabyEntitySpawnEvent event) {
 		// 2 gene types
 		// Discrete, AKA cow produces chocolate milk
 		// Continuous, AKA max health is 18
 		// a child inheriting a continuous gene will get a value ranging from X - Z to Y + Z, where X is the father's value, Y is the mother's, and Z is the average between the two
 
 		// Ensure both mates have genetic values
-		NBTTagCompound parent1NBT = getOrPopulateNBT(entityBreedEvent.getMateOne());
-		NBTTagCompound parent2NBT = getOrPopulateNBT(entityBreedEvent.getMateTwo());
+		NBTTagCompound parent1NBT = getOrPopulateNBT(event.getParentA());
+		NBTTagCompound parent2NBT = getOrPopulateNBT(event.getParentB());
 
-		NBTTagCompound childData = entityBreedEvent.getEntity().getEntityData();
+		NBTTagCompound childData = event.getChild().getEntityData();
 		for (String key : parent1NBT.getKeySet()) {
 			NBTBase parent1Tag = parent1NBT.getTag(key);
 			NBTBase parent2Tag = parent2NBT.getTag(key);
