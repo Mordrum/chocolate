@@ -1,6 +1,6 @@
 package com.mordrum.mciv.common.networking.messages;
 
-import com.mordrum.mciv.client.ClientProxy;
+import com.mordrum.mciv.common.CommonProxy;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -41,7 +41,8 @@ public class ChunkSyncMessage implements IMessage {
 	public static class Handler implements IMessageHandler<ChunkSyncMessage, IMessage> {
 		@Override
 		public IMessage onMessage(ChunkSyncMessage message, MessageContext ctx) {
-			Map<Integer, Map<Integer, Long>> chunkCache = ClientProxy.getChunkCache();
+			Map<Integer, Map<Integer, Long>> chunkCache = CommonProxy.Companion.getChunkCache();
+
 			if (!chunkCache.containsKey(message.x)) {
 				chunkCache.put(message.x, new HashMap<>());
 			}

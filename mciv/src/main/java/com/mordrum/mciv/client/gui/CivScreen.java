@@ -1,26 +1,17 @@
 package com.mordrum.mciv.client.gui;
 
+import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
-import com.mordrum.mciv.common.Civilization;
-import com.mordrum.mciv.common.CommonProxy;
-import com.mordrum.mciv.common.networking.ClientAPIHelper;
-import com.mordrum.mciv.common.networking.messages.CreateCivMessage;
+import com.mordrum.mciv.client.ClientAPIHelper;
 import com.mordrum.mcore.client.gui.ChatColor;
 import com.mordrum.mcore.client.gui.MordrumGui;
 import net.malisis.core.client.gui.Anchor;
 import net.malisis.core.client.gui.component.container.UIBackgroundContainer;
 import net.malisis.core.client.gui.component.decoration.UILabel;
 import net.malisis.core.client.gui.component.interaction.UIButton;
-import net.malisis.core.client.gui.component.interaction.UITextField;
-import net.malisis.core.client.gui.event.ComponentEvent;
-import net.minecraft.block.BlockBanner;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.tileentity.TileEntityBanner;
-import net.minecraft.util.math.RayTraceResult;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.UUID;
 
 public class CivScreen extends MordrumGui {
 	private UIBackgroundContainer detailsContainer;
@@ -34,34 +25,39 @@ public class CivScreen extends MordrumGui {
 		titleLabel.setAnchor(Anchor.CENTER | Anchor.TOP);
 		titleLabel.setPosition(0, 10);
 
-		ClientAPIHelper.getPlayerCivilization(Minecraft.getMinecraft().player.getUniqueID(), (civilization -> {
-			if (civilization.isPresent()) {
-				//TODO migrate this to a separate screen, details / settings view
-				Civilization playerCiv = civilization.get();
-				UILabel infoLabel = new UILabel(this, ChatColor.WHITE + "You are part of " + playerCiv.getName());
+		UUID uuid = Minecraft.getMinecraft().player.getUniqueID();
+
+		ClientAPIHelper.INSTANCE.getPlayer(uuid, Lists.newArrayList("civilization"), ((err, player) -> {
+			if (err == null) {
+				if (player == null || player.getCivilization() == null) {
+					// Player not in database or has no civ
+					UIButton create = new UIButton(this, "Create")
+							.setName("civ.create")
+							.setSize(80)
+							.setAnchor(Anchor.CENTER | Anchor.TOP)
+							.setPosition(0, getPaddedY(titleLabel, 20))
+							.register(this);
+//					UIButton join = new UIButton(this, "Join")
+//							.setName("civ.join")
+//							.setSize(80)
+//							.setAnchor(Anchor.CENTER | Anchor.TOP)
+//							.setPosition(0, getPaddedY(create))
+//							.register(this);
+
+					this.addToScreen(titleLabel);
+					this.addToScreen(create);
+//					this.addToScreen(join);
+				} else {
+					// Civilization found, load info screen
+					new CivInfoScreen(player.getCivilization()).display();
+				}
+			} else {
+				UILabel infoLabel = new UILabel(this, ChatColor.RED + "An error occurred, please try again later");
 				infoLabel.setAnchor(Anchor.CENTER | Anchor.TOP);
 				infoLabel.setPosition(0, getPaddedY(titleLabel));
 				this.addToScreen(infoLabel);
-			} else {
-				UIButton create = new UIButton(this, "Create")
-						.setName("civ.create")
-						.setSize(80)
-						.setAnchor(Anchor.CENTER | Anchor.TOP)
-						.setPosition(0, getPaddedY(titleLabel, 20))
-						.register(this);
-				UIButton join = new UIButton(this, "Join")
-						.setName("civ.join")
-						.setSize(80)
-						.setAnchor(Anchor.CENTER | Anchor.TOP)
-						.setPosition(0, getPaddedY(create))
-						.register(this);
-
-				this.addToScreen(create);
-				this.addToScreen(join);
 			}
 		}));
-
-		this.addToScreen(titleLabel);
 	}
 
 	@Subscribe
