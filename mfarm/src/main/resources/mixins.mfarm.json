@@ -7,8 +7,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BlockCropsMixin",
-    "BlockBushMixin",
-    "EntityAIMateMixin"
+    "BlockBushMixin"
   ],
   "injectors": {
     "defaultRequire": 1

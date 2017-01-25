@@ -14,6 +14,7 @@ import com.mordrum.mciv.common.models.Civilization
 import com.mordrum.mciv.common.models.CivilizationChunk
 import com.mordrum.mciv.common.models.Player
 import com.mordrum.mcore.MCore
+import com.mordrum.mcore.common.util.SafeCallback
 import java.sql.Timestamp
 import java.util.*
 import java.util.concurrent.CancellationException
@@ -62,29 +63,6 @@ abstract class APIHelper {
                         consumer.accept(null, civilizations)
                     }
                 })
-    }
-
-    abstract class SafeCallback<T>(val consumer: BiConsumer<Exception?, T>) : Callback<JsonNode> {
-        lateinit var response: HttpResponse<JsonNode>
-
-        abstract fun onComplete(body: JsonNode)
-
-        override fun completed(response: HttpResponse<JsonNode>) {
-            try {
-                this.response = response
-                onComplete(response.body)
-            } catch(e: Exception) {
-                consumer.accept(e, null)
-            }
-        }
-
-        override fun failed(e: UnirestException?) {
-            consumer.accept(e, null)
-        }
-
-        override fun cancelled() {
-            consumer.accept(CancellationException(), null)
-        }
     }
 }
 

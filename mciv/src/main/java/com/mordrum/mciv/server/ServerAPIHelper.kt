@@ -5,6 +5,7 @@ import com.mashape.unirest.http.Unirest
 import com.mordrum.mciv.common.APIHelper
 import com.mordrum.mciv.common.models.Civilization
 import com.mordrum.mcore.MCore
+import com.mordrum.mcore.common.util.SafeCallback
 import net.minecraft.entity.player.EntityPlayer
 import org.json.JSONArray
 import org.json.JSONObject
