@@ -40,7 +40,7 @@ public abstract class MixinEntityFishHook extends Entity {
                 this.world.setEntityState(this, (byte) 31);
                 i = this.caughtEntity instanceof EntityItem ? 3 : 5;
             } else if (this.ticksCatchable > 0) {
-                ItemStack itemStack = FishingLootGenerator.getFishingLoot(angler, this);
+                ItemStack itemStack = FishingLootGenerator.INSTANCE.getFishingLoot(angler, this);
 
                 EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, itemStack);
                 double d0 = this.angler.posX - this.posX;
