@@ -9,6 +9,9 @@ public class GeneListener {
 	@SubscribeEvent
 	public void onEntityDamaged(LivingHurtEvent event) {
 		Entity entity = event.getEntity();
+		// Don't run our code if the entity that caused the damage damaged itself (fixes stackoverflow)
+		if (entity.equals(event.getSource().getSourceOfDamage())) return;
+
 		if (entity.getEntityData().hasKey("explosive")) {
 			if (entity.getEntityData().getBoolean("explosive")) {
 				BlockPos position = entity.getPosition();
