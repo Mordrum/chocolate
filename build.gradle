@@ -135,5 +135,5 @@ subprojects {
 }
 
 dependencies {
-    compile project(':mcore'), project(':mclimate'), project(':mfish'), project(':mfarm'), project(':mmetallurgy'), project(':mciv')
+    compile project(':mcore'), project(':mclimate'), project(':mfish'), project(':mfarm'), project(':mmetallurgy'), project(':mciv'), project(':mrpg')
 }

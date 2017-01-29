@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfarm/mfarm.iml" filepath="$PROJECT_DIR$/.idea/modules/mfarm/mfarm.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy.iml" filepath="$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mrpg.iml" filepath="$PROJECT_DIR$/.idea/modules/mrpg.iml" />
     </modules>
   </component>
 </project>
