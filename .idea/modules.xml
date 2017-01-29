@@ -3,43 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate_api.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate_api.iml" group="chocolate" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate_main.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate_main.iml" group="chocolate" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chocolate_test.iml" filepath="$PROJECT_DIR$/.idea/modules/chocolate_test.iml" group="chocolate" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mciv/mciv.iml" filepath="$PROJECT_DIR$/.idea/modules/mciv/mciv.iml" group="mciv" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mciv/mciv_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mciv/mciv_api.iml" group="mciv" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mciv/mciv_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mciv/mciv_main.iml" group="mciv" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mciv/mciv_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mciv/mciv_test.iml" group="mciv" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mclimate/mclimate.iml" filepath="$PROJECT_DIR$/.idea/modules/mclimate/mclimate.iml" group="mclimate" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mclimate/mclimate_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mclimate/mclimate_api.iml" group="mclimate" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mclimate/mclimate_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mclimate/mclimate_main.iml" group="mclimate" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mclimate/mclimate_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mclimate/mclimate_test.iml" group="mclimate" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcore/mcore.iml" filepath="$PROJECT_DIR$/.idea/modules/mcore/mcore.iml" group="mcore" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcore/mcore_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mcore/mcore_api.iml" group="mcore" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcore/mcore_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mcore/mcore_main.iml" group="mcore" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcore/mcore_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mcore/mcore_test.iml" group="mcore" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mdeco/mdeco_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mdeco/mdeco_api.iml" group="mdeco" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mdeco/mdeco_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mdeco/mdeco_main.iml" group="mdeco" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mdeco/mdeco_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mdeco/mdeco_test.iml" group="mdeco" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfarm/mfarm.iml" filepath="$PROJECT_DIR$/.idea/modules/mfarm/mfarm.iml" group="mfarm" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfarm/mfarm_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mfarm/mfarm_api.iml" group="mfarm" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfarm/mfarm_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mfarm/mfarm_main.iml" group="mfarm" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfarm/mfarm_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mfarm/mfarm_test.iml" group="mfarm" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish.iml" group="mfish" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish_api.iml" group="mfish" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish_main.iml" group="mfish" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish_test.iml" group="mfish" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy.iml" filepath="$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy.iml" group="mmetallurgy" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_api.iml" group="mmetallurgy" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_main.iml" group="mmetallurgy" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy_test.iml" group="mmetallurgy" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mpower/mpower_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mpower/mpower_api.iml" group="mpower" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mpower/mpower_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mpower/mpower_main.iml" group="mpower" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mpower/mpower_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mpower/mpower_test.iml" group="mpower" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mskill/mskill.iml" filepath="$PROJECT_DIR$/.idea/modules/mskill/mskill.iml" group="mskill" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mskill/mskill_api.iml" filepath="$PROJECT_DIR$/.idea/modules/mskill/mskill_api.iml" group="mskill" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mskill/mskill_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mskill/mskill_main.iml" group="mskill" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mskill/mskill_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mskill/mskill_test.iml" group="mskill" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mciv/mciv.iml" filepath="$PROJECT_DIR$/.idea/modules/mciv/mciv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mclimate/mclimate.iml" filepath="$PROJECT_DIR$/.idea/modules/mclimate/mclimate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mcore/mcore.iml" filepath="$PROJECT_DIR$/.idea/modules/mcore/mcore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfarm/mfarm.iml" filepath="$PROJECT_DIR$/.idea/modules/mfarm/mfarm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfish/mfish.iml" filepath="$PROJECT_DIR$/.idea/modules/mfish/mfish.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy.iml" filepath="$PROJECT_DIR$/.idea/modules/mmetallurgy/mmetallurgy.iml" />
     </modules>
   </component>
 </project>
