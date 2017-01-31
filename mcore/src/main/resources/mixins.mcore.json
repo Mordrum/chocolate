@@ -5,9 +5,9 @@
   "refmap": "mixins.mcore.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
-//  "mixins": [
-//    "ChunkProviderSettingsFactoryMixin"
-//  ],
+  "mixins": [
+    "StopCollisionBoxesEvent"
+  ],
   "client": [
     "PlayerControllerMPMixin",
     "RenderGlobalMixin"
