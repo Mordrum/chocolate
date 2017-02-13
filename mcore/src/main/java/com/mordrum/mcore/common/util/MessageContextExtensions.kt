@@ -6,16 +6,16 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
 
-fun MessageContext.getPlayer(): EntityPlayer {
+fun MessageContext.getPlayer(): EntityPlayer? {
     if (this.side == Side.SERVER)
-        return this.serverHandler.playerEntity
+        return this.serverHandler.player
     else
         return Minecraft.getMinecraft().player
 }
 
-fun MessageContext.getWorld(): World {
+fun MessageContext.getWorld(): World? {
     if (this.side == Side.SERVER)
-        return this.serverHandler.playerEntity.world
+        return this.serverHandler.player.world
     else
         return Minecraft.getMinecraft().world
 }

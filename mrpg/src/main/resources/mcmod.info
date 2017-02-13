@@ -1,0 +1,9 @@
+[
+  {
+    "modid": "${modid}",
+    "name": "${name}",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "authorList": ["SirSavary"]
+  }
+]

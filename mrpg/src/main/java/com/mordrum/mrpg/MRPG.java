@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = MRPG.MOD_ID, name = MRPG.MOD_NAME, version = MRPG.VERSION, dependencies = "required-after:malisiscore")
+@Mod(modid = MRPG.MOD_ID, name = MRPG.MOD_NAME, version = MRPG.VERSION, dependencies = "required-after:malisiscore;required-after:mcore")
 public class MRPG {
 	public static final String MOD_ID = "mrpg";
 	static final String MOD_NAME = "mRPG";

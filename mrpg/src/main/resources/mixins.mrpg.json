@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.5.7",
+  "package": "com.mordrum.mrpg.common.mixins",
+  "refmap": "mixins.mrpg.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinEntityPlayer",
+    "MixinItemSword",
+    "MixinEntityLivingBase"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
