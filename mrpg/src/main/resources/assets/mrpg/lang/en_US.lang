@@ -1,0 +1,50 @@
+item.mrpg.diamond.battleaxe.name=Diamond Battleaxe
+item.mrpg.gold.battleaxe.name=Gold Battleaxe
+item.mrpg.iron.battleaxe.name=Iron Battleaxe
+item.mrpg.stone.battleaxe.name=Stone Battleaxe
+item.mrpg.wood.battleaxe.name=Wood Battleaxe
+
+item.mrpg.diamond.flail.name=Diamond Flail
+item.mrpg.gold.flail.name=Gold Flail
+item.mrpg.iron.flail.name=Iron Flail
+item.mrpg.stone.flail.name=Stone Flail
+item.mrpg.wood.flail.name=Wood Flail
+
+item.mrpg.diamond.halberd.name=Diamond Halberd
+item.mrpg.gold.halberd.name=Gold Halberd
+item.mrpg.iron.halberd.name=Iron Halberd
+item.mrpg.stone.halberd.name=Stone Halberd
+item.mrpg.wood.halberd.name=Wood Halberd
+
+item.mrpg.diamond.katana.name=Diamond Katana
+item.mrpg.gold.katana.name=Gold Katana
+item.mrpg.iron.katana.name=Iron Katana
+item.mrpg.stone.katana.name=Stone Katana
+item.mrpg.wood.katana.name=Wood Katana
+
+item.mrpg.diamond.knife.name=Diamond Knife
+item.mrpg.gold.knife.name=Gold Knife
+item.mrpg.iron.knife.name=Iron Knife
+item.mrpg.stone.knife.name=Stone Knife
+item.mrpg.wood.knife.name=Wood Knife
+
+item.mrpg.diamond.spear.name=Diamond Spear
+item.mrpg.gold.spear.name=Gold Spear
+item.mrpg.iron.spear.name=Iron Spear
+item.mrpg.stone.spear.name=Stone Spear
+item.mrpg.wood.spear.name=Wood Spear
+
+item.mrpg.diamond.warhammer.name=Diamond Warhammer
+item.mrpg.gold.warhammer.name=Gold Warhammer
+item.mrpg.iron.warhammer.name=Iron Warhammer
+item.mrpg.stone.warhammer.name=Stone Warhammer
+item.mrpg.wood.warhammer.name=Wood Warhammer
+
+attribute.name.mrpg.vitality=Vitality
+attribute.name.mrpg.strength=Strength
+attribute.name.mrpg.defense=Defense
+attribute.name.mrpg.agility=Agility
+attribute.name.mrpg.critical_chance=Critical Chance
+attribute.name.mrpg.max_stamina=Max Stamina
+attribute.name.mrpg.max_spirit=Max Spirit
+attribute.name.mrpg.sweep_range=Sweep Range
