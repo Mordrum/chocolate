@@ -79,6 +79,17 @@ allprojects {
             dirs("$rootProject.projectDir/libs")
         }
     }
+
+    tasks.withType(JavaCompile) {
+        options.incremental = true // one flag, and things will get MUCH faster
+    }
+
+    // Fixes an issue where the httpclient forge brings in messes with Unirest
+    configurations.all {
+        resolutionStrategy {
+            forcedModules = ['org.apache.httpcomponents:httpclient:4.5.2']
+        }
+    }
 }
 
 subprojects {
