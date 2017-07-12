@@ -24,7 +24,6 @@ public abstract class BlockCropsMixin implements IPlantable {
     @Inject(method = "updateTick", at = @At("HEAD"), cancellable =  true)
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand, CallbackInfo callbackInfo) {
         if (!worldIn.canSeeSky(pos)) {
-            System.out.println("Block @ " + pos.getX() + "," + pos.getZ() + " can not see the sky");
             callbackInfo.cancel();
         }
     }
