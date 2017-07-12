@@ -7,10 +7,8 @@ import com.mordrum.mciv.common.models.Civilization
 import com.mordrum.mcore.MCore
 import com.mordrum.mcore.common.util.SafeCallback
 import net.minecraft.entity.player.EntityPlayer
-import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
-import java.util.function.BiConsumer
 import java.util.function.Consumer
 
 object ServerAPIHelper: APIHelper() {

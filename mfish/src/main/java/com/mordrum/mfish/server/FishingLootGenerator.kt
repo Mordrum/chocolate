@@ -1,17 +1,14 @@
 package com.mordrum.mfish.server
 
-import com.mordrum.mfish.common.Achievements
 import com.mordrum.mfish.common.CommonProxy
 import com.mordrum.mfish.common.Fish
 import com.mordrum.mfish.common.events.FishCaughtEvent
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.entity.projectile.EntityFishHook
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.JsonSerializableSet
 import net.minecraft.util.text.TextComponentString
 import net.minecraftforge.common.MinecraftForge
 import org.apache.commons.math3.distribution.FDistribution
@@ -19,7 +16,7 @@ import java.math.BigDecimal
 import java.math.MathContext
 import java.text.DecimalFormat
 import java.util.*
-import java.util.function.BiConsumer
+import java.util.function.Consumer
 
 object FishingLootGenerator {
     private val sb = StringBuilder()
@@ -68,10 +65,8 @@ object FishingLootGenerator {
         MinecraftForge.EVENT_BUS.post(FishCaughtEvent(player, fishHook as EntityFishHook, selectedFish, weight))
 
         //TODO migrate these methods out, perhaps into a listener class that listens for FishCaughtEvent
-        APIHelper.checkHighscore(player, selectedFish, weight, BiConsumer { error, isHighscore ->
-            if (error != null) {
-                player.sendMessage(TextComponentString("An error occurred while sending your fish to the API server: " + error.message))
-            } else if (isHighscore!!) {
+        APIHelper.checkHighscore(player, selectedFish, weight, Consumer { isHighscore ->
+            if (isHighscore) {
                 sb.setLength(0)
                 sb.append(player.name)
                         .append(" just caught a record breaking ")
@@ -86,8 +81,11 @@ object FishingLootGenerator {
             } else {
                 player.sendMessage(TextComponentString("You caught a " + decimalFormat.format(weight) + "lb " + selectedFish!!.name))
             }
+        }, Consumer { error ->
+            player.sendMessage(TextComponentString("An error occurred while sending your fish to the API server: " + error.message))
         })
-        checkAchievements(player, selectedFish, weight)
+        //FIXME advancements
+        //checkAchievements(player, selectedFish, weight)
 
         return itemStack
     }
@@ -102,6 +100,7 @@ object FishingLootGenerator {
         return BigDecimal(weight).round(MathContext(3)).toDouble()
     }
 
+    /*FIXME advancements
     private fun checkAchievements(player: EntityPlayer, fish: Fish, weight: Double) {
         val statFile = (player as EntityPlayerMP).statFile
         if (!statFile.hasAchievementUnlocked(Achievements.FISHOLOGIST)) {
@@ -142,4 +141,5 @@ object FishingLootGenerator {
             player.addStat(Achievements.TO_FEED_AN_ARMY, 1)
         }
     }
+    */
 }
