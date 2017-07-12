@@ -1,13 +1,13 @@
 package com.mordrum.mfarm.mixins;
 
 import com.mordrum.mfarm.events.EntityBreedEvent;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.stats.AchievementList;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
@@ -23,7 +23,7 @@ import java.util.Random;
 public class EntityAIMateMixin {
 	@Shadow
 	@Final
-	private EntityAnimal theAnimal;
+	private EntityAnimal animal;
 	@Shadow
 	World world;
 	@Shadow
@@ -31,51 +31,51 @@ public class EntityAIMateMixin {
 
 	@Overwrite
 	private void spawnBaby() {
-		EntityAgeable entityageable = this.theAnimal.createChild(this.targetMate);
+		EntityAgeable entityageable = this.animal.createChild(this.targetMate);
 
 		if (entityageable != null) {
-			EntityPlayer entityplayer = this.theAnimal.getPlayerInLove();
+			EntityPlayerMP entityplayer = this.animal.getLoveCause();
 
-			if (entityplayer == null && this.targetMate.getPlayerInLove() != null) {
-				entityplayer = this.targetMate.getPlayerInLove();
+			if (entityplayer == null && this.targetMate.getLoveCause() != null) {
+				entityplayer = this.targetMate.getLoveCause();
 			}
 
 			if (entityplayer != null) {
 				entityplayer.addStat(StatList.ANIMALS_BRED);
 
-				if (this.theAnimal instanceof EntityCow) {
-					entityplayer.addStat(AchievementList.BREED_COW);
+				if (this.animal instanceof EntityCow) {
+					CriteriaTriggers.BRED_ANIMALS.trigger(entityplayer, this.animal, this.targetMate, entityageable);
 				}
 			}
 
 			// Set the defaults before we fire the event so changes will persist
 			entityageable.setGrowingAge(-24000);
-			entityageable.setLocationAndAngles(this.theAnimal.posX, this.theAnimal.posY, this.theAnimal.posZ, 0.0F, 0.0F);
-			EntityBreedEvent breedEvent = new EntityBreedEvent(entityageable, this.theAnimal, this.targetMate);
+			entityageable.setLocationAndAngles(this.animal.posX, this.animal.posY, this.animal.posZ, 0.0F, 0.0F);
+			EntityBreedEvent breedEvent = new EntityBreedEvent(entityageable, this.animal, this.targetMate);
 			MinecraftForge.EVENT_BUS.post(breedEvent);
 			if (breedEvent.isCanceled()) return;
 
-			this.theAnimal.setGrowingAge(6000);
+			this.animal.setGrowingAge(6000);
 			this.targetMate.setGrowingAge(6000);
-			this.theAnimal.resetInLove();
+			this.animal.resetInLove();
 			this.targetMate.resetInLove();
 
 			this.world.spawnEntity(entityageable);
-			Random random = this.theAnimal.getRNG();
+			Random random = this.animal.getRNG();
 
 			for (int i = 0; i < 7; ++i) {
 				double d0 = random.nextGaussian()*0.02D;
 				double d1 = random.nextGaussian()*0.02D;
 				double d2 = random.nextGaussian()*0.02D;
-				double d3 = random.nextDouble()*(double) this.theAnimal.width*2.0D - (double) this.theAnimal.width;
-				double d4 = 0.5D + random.nextDouble()*(double) this.theAnimal.height;
-				double d5 = random.nextDouble()*(double) this.theAnimal.width*2.0D - (double) this.theAnimal.width;
+				double d3 = random.nextDouble()*(double) this.animal.width*2.0D - (double) this.animal.width;
+				double d4 = 0.5D + random.nextDouble()*(double) this.animal.height;
+				double d5 = random.nextDouble()*(double) this.animal.width*2.0D - (double) this.animal.width;
 				this.world.spawnParticle(EnumParticleTypes.HEART,
-						this.theAnimal.posX + d3, this.theAnimal.posY + d4, this.theAnimal.posZ + d5, d0, d1, d2);
+						this.animal.posX + d3, this.animal.posY + d4, this.animal.posZ + d5, d0, d1, d2);
 			}
 
 			if (this.world.getGameRules().getBoolean("doMobLoot")) {
-				this.world.spawnEntity(new EntityXPOrb(this.world, this.theAnimal.posX, this.theAnimal.posY, this.theAnimal.posZ,
+				this.world.spawnEntity(new EntityXPOrb(this.world, this.animal.posX, this.animal.posY, this.animal.posZ,
 						random.nextInt(7) + 1));
 			}
 		}

@@ -3,7 +3,6 @@ package com.mordrum.mclimate.mixins;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntitySkeletonHorse;
 import net.minecraft.init.Blocks;
 import net.minecraft.profiler.Profiler;
@@ -39,18 +38,18 @@ public abstract class WorldServerMixin extends World implements IThreadListener 
         int i = this.getGameRules().getInt("randomTickSpeed");
         boolean flag = this.isRaining();
         boolean flag1 = this.isThundering();
-        this.theProfiler.startSection("pollingChunks");
+        this.profiler.startSection("pollingChunks");
 
-        for (Iterator<Chunk> iterator = getPersistentChunkIterable(this.playerChunkMap.getChunkIterator()); iterator.hasNext(); this.theProfiler.endSection()) {
-            this.theProfiler.startSection("getChunk");
+        for (Iterator<Chunk> iterator = getPersistentChunkIterable(this.playerChunkMap.getChunkIterator()); iterator.hasNext(); this.profiler.endSection()) {
+            this.profiler.startSection("getChunk");
             Chunk chunk = (Chunk) iterator.next();
-            int j = chunk.xPosition * 16;
-            int k = chunk.zPosition * 16;
-            this.theProfiler.endStartSection("checkNextLight");
+            int j = chunk.x * 16;
+            int k = chunk.z * 16;
+            this.profiler.endStartSection("checkNextLight");
             chunk.enqueueRelightChecks();
-            this.theProfiler.endStartSection("tickChunk");
+            this.profiler.endStartSection("tickChunk");
             chunk.onTick(false);
-            this.theProfiler.endStartSection("thunder");
+            this.profiler.endStartSection("thunder");
 
             if (this.provider.canDoLightning(chunk) && flag && flag1 && this.rand.nextInt(100000) == 0) {
                 this.updateLCG = this.updateLCG * 3 + 1013904223;
@@ -73,7 +72,7 @@ public abstract class WorldServerMixin extends World implements IThreadListener 
                 }
             }
 
-            this.theProfiler.endStartSection("iceandsnow");
+            this.profiler.endStartSection("iceandsnow");
 
             if (this.provider.canDoRainSnowIce(chunk) && this.rand.nextInt(16) == 0) {
                 this.updateLCG = this.updateLCG * 3 + 1013904223;
@@ -82,11 +81,11 @@ public abstract class WorldServerMixin extends World implements IThreadListener 
                 checkBlockPosForChanges(blockpos1, flag);
             }
 
-            this.theProfiler.endStartSection("tickBlocks");
+            this.profiler.endStartSection("tickBlocks");
 
             if (i > 0) {
                 for (ExtendedBlockStorage extendedblockstorage : chunk.getBlockStorageArray()) {
-                    if (extendedblockstorage != Chunk.NULL_BLOCK_STORAGE && extendedblockstorage.getNeedsRandomTick()) {
+                    if (extendedblockstorage != Chunk.NULL_BLOCK_STORAGE && extendedblockstorage.needsRandomTick()) {
                         for (int i1 = 0; i1 < i; ++i1) {
                             this.updateLCG = this.updateLCG * 3 + 1013904223;
                             int j1 = this.updateLCG >> 2;
@@ -95,20 +94,20 @@ public abstract class WorldServerMixin extends World implements IThreadListener 
                             int i2 = j1 >> 16 & 15;
                             IBlockState iblockstate = extendedblockstorage.get(k1, i2, l1);
                             Block block = iblockstate.getBlock();
-                            this.theProfiler.startSection("randomTick");
+                            this.profiler.startSection("randomTick");
 
                             if (block.getTickRandomly()) {
                                 block.randomTick(this, new BlockPos(k1 + j, i2 + extendedblockstorage.getYLocation(), l1 + k), iblockstate, this.rand);
                             }
 
-                            this.theProfiler.endSection();
+                            this.profiler.endSection();
                         }
                     }
                 }
             }
         }
 
-        this.theProfiler.endSection();
+        this.profiler.endSection();
     }
 
     @Shadow

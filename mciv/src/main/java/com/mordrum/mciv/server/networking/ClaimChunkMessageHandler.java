@@ -29,7 +29,7 @@ public class ClaimChunkMessageHandler implements IMessageHandler<ChunkClaimMessa
 
 	@Override
 	public IMessage onMessage(ChunkClaimMessage.Request message, MessageContext ctx) {
-		EntityPlayerMP playerEntity = ctx.getServerHandler().playerEntity;
+		EntityPlayerMP playerEntity = ctx.getServerHandler().player;
 
 		int chunkX = playerEntity.getPosition().getX() >> 4;
 		int chunkZ = playerEntity.getPosition().getZ() >> 4;

@@ -12,8 +12,10 @@ import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.CraftingManager
+import net.minecraft.item.crafting.IRecipe
 import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.event.RegistryEvent
+import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
@@ -22,6 +24,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.oredict.OreDictionary
 
+@Mod.EventBusSubscriber(modid = MFarm.MOD_ID)
 open class CommonProxy {
     companion object {
         val NETWORK_WRAPPER: SimpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MFarm.MOD_ID)
@@ -32,6 +35,14 @@ open class CommonProxy {
     open fun preInit(event: FMLPreInitializationEvent) {
         NETWORK_WRAPPER.registerMessage(BeginFermentationMessageHandler::class.java, BeginFermentationMessage::class.java, DISCRIMINATOR++, Side.SERVER)
 
+        MinecraftForge.EVENT_BUS.register(GeneticsListener())
+        MinecraftForge.EVENT_BUS.register(GeneListener())
+    }
+
+    open fun init(event: FMLInitializationEvent) {
+    }
+
+    open fun registerRecipes(event: RegistryEvent.Register<IRecipe>) {
         ringBlockItemToBlockMap = ImmutableMap.Builder<Item, Block>()
                 // Vanilla stuff
                 .put(Items.IRON_INGOT, Blocks.IRON_BLOCK)
@@ -70,15 +81,9 @@ open class CommonProxy {
         planks.forEach { barrelPlank ->
             planks.forEach { feetPlank ->
                 ringBlockItemToBlockMap.keys.forEach { ringItem ->
-                    CraftingManager.getInstance().addRecipe(CaskRecipe(cask, ItemStack(ringItem), barrelPlank, feetPlank))
+                    event.registry.register(CaskRecipe(cask, ItemStack(ringItem), barrelPlank, feetPlank))
                 }
             }
         }
-
-        MinecraftForge.EVENT_BUS.register(GeneticsListener())
-        MinecraftForge.EVENT_BUS.register(GeneListener())
-    }
-
-    open fun init(event: FMLInitializationEvent) {
     }
 }

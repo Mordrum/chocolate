@@ -1,11 +1,13 @@
 package com.mordrum.mmetallurgy.items;
 
 import com.mordrum.mmetallurgy.MMetallurgy;
+import net.malisis.core.util.replacement.ShapedRecipesHandler;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class Armor extends ItemArmor {
@@ -16,7 +18,6 @@ public class Armor extends ItemArmor {
 		String slotName = equipmentSlotIn.getName().toLowerCase();
 		this.setRegistryName(metalName + "_" + slotName);
 		this.setUnlocalizedName(MMetallurgy.MOD_ID + "." + metalName + "." + slotName);
-		GameRegistry.register(this);
 
 		String[] pattern = new String[0];
 		switch (equipmentSlotIn) {
@@ -34,6 +35,7 @@ public class Armor extends ItemArmor {
 				break;
 		}
 
-		CraftingManager.getInstance().addRecipe(new ItemStack(this), pattern, 'X', Item.getByNameOrId(MMetallurgy.MOD_ID + ":" + metalName + "_ingot"));
+		//FIXME FUCKING LEX BREAKING SHAPED RECIPES GOD FUCKING DAMMIT
+//		CraftingManager.getInstance().addRecipe(new ItemStack(this), pattern, 'X', Item.getByNameOrId(MMetallurgy.MOD_ID + ":" + metalName + "_ingot"));
 	}
 }

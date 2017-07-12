@@ -1,6 +1,5 @@
 package com.mordrum.mfish.server;
 
-import com.mordrum.mfish.common.Achievements;
 import com.mordrum.mfish.common.CommonProxy;
 import com.mordrum.mfish.common.Fish;
 import com.mordrum.mfish.common.events.FishCaughtEvent;
@@ -12,7 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatisticsManagerServer;
-import net.minecraft.util.JsonSerializableSet;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.commons.math3.distribution.FDistribution;
@@ -70,6 +68,7 @@ public class FishingLootGenerator {
                 HighscoreManager.checkHighscore(player, fish, weight);
 
 
+                /*FIXME advancements
 	            StatisticsManagerServer statFile = ((EntityPlayerMP) player).getStatFile();
 	            if (!statFile.hasAchievementUnlocked(Achievements.FISHOLOGIST)) {
 		            JsonSerializableSet jsonserializableset = statFile.getProgress(Achievements.FISHOLOGIST);
@@ -85,7 +84,9 @@ public class FishingLootGenerator {
 						player.addStat(Achievements.FISHING_101);
 					}
 	            }
+	            */
 
+	            /*FIXME advancements
 	            // Big catch achievement
 	            if (weight >= 100.0) {
 					player.addStat(Achievements.THE_BIG_ONE);
@@ -94,6 +95,7 @@ public class FishingLootGenerator {
 	            } else if (originalWeight <= 1.0) {
 		            player.addStat(Achievements.LITTLE_GUPPY);
 	            }
+	            */
 
 	            // Keep track of the number of pounds this player has caught so far
 	            NBTTagCompound entityData = player.getEntityData();
@@ -101,6 +103,8 @@ public class FishingLootGenerator {
 	            if (entityData.hasKey("totalweight")) totalWeightCaughtSoFar = entityData.getDouble("totalweight");
 				totalWeightCaughtSoFar += weight;
 				entityData.setDouble("totalweight", totalWeightCaughtSoFar);
+
+				/*FIXME advancements
                 if (totalWeightCaughtSoFar >= 100) {
                     player.addStat(Achievements.TO_FEED_A_FAMILY, 1);
                 } else if (totalWeightCaughtSoFar >= 1000) {
@@ -108,6 +112,7 @@ public class FishingLootGenerator {
                 } else if (totalWeightCaughtSoFar >= 10000) {
 	                player.addStat(Achievements.TO_FEED_AN_ARMY, 1);
                 }
+                */
 
 	            return itemStack;
             }

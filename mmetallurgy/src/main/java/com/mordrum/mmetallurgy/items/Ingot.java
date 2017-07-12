@@ -7,7 +7,7 @@ public class Ingot extends MalisisItem {
 	private boolean isAlloy = false;
 
 	public Ingot(String name) {
-		this.name = name + "_ingot";
+		this.setName(name + "_ingot");
 
 		register();
 

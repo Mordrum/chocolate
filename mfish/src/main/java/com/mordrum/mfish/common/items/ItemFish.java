@@ -2,6 +2,7 @@ package com.mordrum.mfish.common.items;
 
 import com.mordrum.mfish.MFish;
 import com.mordrum.mfish.common.Fish;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -9,9 +10,11 @@ import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.DecimalFormat;
@@ -30,7 +33,7 @@ public class ItemFish extends ItemFishFood {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
         for (Fish fish : Fish.getFishes()) {
             subItems.add(new ItemStack(this, 1, fish.getMetadata()));
         }
@@ -55,7 +58,7 @@ public class ItemFish extends ItemFishFood {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (stack.hasTagCompound()) {
             if (stack.getTagCompound().hasKey("Weight")) {
                 float weight = stack.getTagCompound().getFloat("Weight");

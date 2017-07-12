@@ -110,8 +110,19 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
-run/
 /classes/
 
-build
-run
+# Upload most of the Minecraft world files but leave some stuff out
+# Intended to make bootstrapping easier
+run/world
+run/saves
+run/crash-reports
+run/.mixin.out
+run/**.json
+run/options.txt
+run/.idea
+!run/mods/*
+run/config/biomesoplenty/biomes/defaults/
+
+# Ignore the MC assets that are extracted
+assets/

@@ -7,11 +7,14 @@ import com.typesafe.config.ConfigFactory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.io.IOException;
@@ -20,19 +23,16 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
+@Mod.EventBusSubscriber(modid = MFish.MOD_ID)
 public class CommonProxy {
-//    protected String[] fishToRegister = new String[]{"carp", "trout", "koi", "steed", "dace", "catfish", "chub", "bitterling", "loach", "bluegill", "bass", "snakehead", "eel", "goby", "smelt", "char", "stringfish", "goldfish", "guppy", "angelfish", "piranha", "arowana", "arapaima", "crawfish", "frog", "killifish", "jellyfish", "snapper", "knifejaw"};
     public static Config config;
-    public static ItemFish rawItem;
-    public static ItemFish cookedItem;
+    public static ItemFish rawItem = new ItemFish(false);
+    public static ItemFish cookedItem = new ItemFish(true);
 
     public void onPreInit(FMLPreInitializationEvent event) {
         System.out.println("Pre Init");
         if (!event.getSuggestedConfigurationFile().exists()) {
             try {
-//                ConfigRenderOptions configRenderOptions = ConfigRenderOptions.defaults().setOriginComments(false).setComments(false).setJson(false);
-//                System.out.println(ConfigFactory.empty().withValue("fish", ConfigValueFactory.fromIterable(Lists.asList(new Fish("carp", Fish.EnvironmentType.WARM, 10, 0), new Fish[]{}))).root().render(configRenderOptions));
-
                 InputStream inputStream = getClass().getResourceAsStream("/default_config.conf");
                 Files.copy(inputStream, event.getSuggestedConfigurationFile().toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
@@ -47,18 +47,15 @@ public class CommonProxy {
         System.out.println("Init");
 
         loadFish();
-        Achievements.registerAchievements();
+        //FIXME advancements
+//        Achievements.registerAchievements();
     }
 
     private void loadFish() {
-//        Arrays.sort(fishToRegister);
         ItemModelMesher itemModelMesher = null;
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
             itemModelMesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
         }
-
-        rawItem = GameRegistry.register(new ItemFish(false));
-        cookedItem = GameRegistry.register(new ItemFish(true));
 
         List<? extends Config> fish = config.getConfigList("fish");
         for (Config fishConfig : fish) {
@@ -77,5 +74,10 @@ public class CommonProxy {
                 ModelLoader.setCustomModelResourceLocation(cookedItem, metadata, new ModelResourceLocation(MFish.MOD_ID + ":cooked_" + fishName, "inventory"));
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+        event.getRegistry().registerAll(rawItem, cookedItem);
     }
 }

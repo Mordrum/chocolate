@@ -17,7 +17,7 @@ import com.mordrum.mcore.MCore
 import java.sql.Timestamp
 import java.util.*
 import java.util.concurrent.CancellationException
-import java.util.function.BiConsumer
+import java.util.function.Consumer
 
 abstract class APIHelper {
     val gson: Gson
@@ -41,30 +41,30 @@ abstract class APIHelper {
         gson = builder.create()
     }
 
-    fun getPlayer(uuid: UUID, with: Collection<String>, consumer: BiConsumer<Exception?, Player>) {
+    fun getPlayer(uuid: UUID, with: Collection<String>, successHandler: Consumer<Player>, errorHandler: Consumer<Exception>) {
         Unirest.get(MCore.API_URL + "/players/$uuid")
                 .queryString("with", with)
-                .asJsonAsync(object : SafeCallback<Player>(consumer), Callback<JsonNode> {
+                .asJsonAsync(object : SafeCallback<Player>(errorHandler), Callback<JsonNode> {
                     override fun onComplete(body: JsonNode) {
                         val player = gson.fromJson(body.toString(), Player::class.java)
-                        consumer.accept(null, player)
+                        successHandler.accept(player)
                     }
                 })
     }
 
-    fun getCivilizations(params: Map<String, Any>, with: Collection<String>, consumer: BiConsumer<Exception?, Array<Civilization>>) {
+    fun getCivilizations(params: Map<String, Any>, with: Collection<String>, successHandler: Consumer<Array<Civilization>>, errorHandler: Consumer<Exception>) {
         Unirest.get(MCore.API_URL + "/civilizations")
                 .queryString(params)
                 .queryString("with", with)
-                .asJsonAsync(object : SafeCallback<Array<Civilization>>(consumer) {
+                .asJsonAsync(object : SafeCallback<Array<Civilization>>(errorHandler) {
                     override fun onComplete(body: JsonNode) {
                         val civilizations = gson.fromJson(body.toString(), Array<Civilization>::class.java)
-                        consumer.accept(null, civilizations)
+                        successHandler.accept(civilizations)
                     }
                 })
     }
 
-    abstract class SafeCallback<T>(val consumer: BiConsumer<Exception?, T>) : Callback<JsonNode> {
+    abstract class SafeCallback<T>(val errorHandler: Consumer<Exception>) : Callback<JsonNode> {
         lateinit var response: HttpResponse<JsonNode>
 
         abstract fun onComplete(body: JsonNode)
@@ -74,16 +74,16 @@ abstract class APIHelper {
                 this.response = response
                 onComplete(response.body)
             } catch(e: Exception) {
-                consumer.accept(e, null)
+                errorHandler.accept(e)
             }
         }
 
-        override fun failed(e: UnirestException?) {
-            consumer.accept(e, null)
+        override fun failed(e: UnirestException) {
+            errorHandler.accept(e)
         }
 
         override fun cancelled() {
-            consumer.accept(CancellationException(), null)
+            errorHandler.accept(CancellationException())
         }
     }
 }

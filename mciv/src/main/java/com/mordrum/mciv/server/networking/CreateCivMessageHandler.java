@@ -17,22 +17,21 @@ public class CreateCivMessageHandler implements IMessageHandler<CreateCivMessage
 
 	@Override
 	public CreateCivMessage.Response onMessage(CreateCivMessage.Request message, MessageContext ctx) {
-		EntityPlayerMP playerEntity = ctx.getServerHandler().playerEntity;
+		EntityPlayerMP playerEntity = ctx.getServerHandler().player;
 
 		if (!playerHasEnoughGold(playerEntity, 3)) {
 			playerEntity.sendMessage(new TextComponentString("You must have 3 gold blocks to create a new civilization"));
 			return null;
 		}
 
-		ServerAPIHelper.INSTANCE.createCivilization(message.getCivName(), message.getBannerId(), playerEntity, (error, response) -> {
-			if (error != null) {
-				playerEntity.sendMessage(new TextComponentString("Failed to create civilization: " + error.getMessage()));
-			} else {
-				playerEntity.inventory.clearMatchingItems(Item.getItemFromBlock(Blocks.GOLD_BLOCK), -1, 3, null);
-				ServerUtilities.broadcastMessageToPlayers(new TextComponentString(playerEntity.getName() + " has founded the civilization of " + message.getCivName()));
-				CommonProxy.Companion.getNETWORK_WRAPPER().sendToAll(new SyncCivMessage(response.getId(), true));
-				CommonProxy.Companion.syncCivilization(response.getId(), true);
-			}
+		ServerAPIHelper.INSTANCE.createCivilization(message.getCivName(), message.getBannerId(), playerEntity, (response) -> {
+			playerEntity.inventory.clearMatchingItems(Item.getItemFromBlock(Blocks.GOLD_BLOCK), -1, 3, null);
+			ServerUtilities.broadcastMessageToPlayers(new TextComponentString(playerEntity.getName() + " has founded the civilization of " + message.getCivName()));
+			CommonProxy.Companion.getNETWORK_WRAPPER().sendToAll(new SyncCivMessage(response.getId(), true));
+			CommonProxy.Companion.syncCivilization(response.getId(), true);
+		}, (error) -> {
+			playerEntity.sendMessage(new TextComponentString("Failed to create civilization: " + error.getMessage()));
+
 		});
 
 		return null;

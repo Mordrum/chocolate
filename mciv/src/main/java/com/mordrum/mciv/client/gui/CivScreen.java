@@ -27,16 +27,15 @@ public class CivScreen extends MordrumGui {
 
 		UUID uuid = Minecraft.getMinecraft().player.getUniqueID();
 
-		ClientAPIHelper.INSTANCE.getPlayer(uuid, Lists.newArrayList("civilization"), ((err, player) -> {
-			if (err == null) {
-				if (player == null || player.getCivilization() == null) {
-					// Player not in database or has no civ
-					UIButton create = new UIButton(this, "Create")
-							.setName("civ.create")
-							.setSize(80)
-							.setAnchor(Anchor.CENTER | Anchor.TOP)
-							.setPosition(0, getPaddedY(titleLabel, 20))
-							.register(this);
+		ClientAPIHelper.INSTANCE.getPlayer(uuid, Lists.newArrayList("civilization"), (( player) -> {
+			if (player == null || player.getCivilization() == null) {
+				// Player not in database or has no civ
+				UIButton create = new UIButton(this, "Create")
+						.setName("civ.create")
+						.setSize(80)
+						.setAnchor(Anchor.CENTER | Anchor.TOP)
+						.setPosition(0, getPaddedY(titleLabel, 20))
+						.register(this);
 //					UIButton join = new UIButton(this, "Join")
 //							.setName("civ.join")
 //							.setSize(80)
@@ -44,20 +43,19 @@ public class CivScreen extends MordrumGui {
 //							.setPosition(0, getPaddedY(create))
 //							.register(this);
 
-					this.addToScreen(titleLabel);
-					this.addToScreen(create);
+				this.addToScreen(titleLabel);
+				this.addToScreen(create);
 //					this.addToScreen(join);
-				} else {
-					// Civilization found, load info screen
-					new CivInfoScreen(player.getCivilization()).display();
-				}
 			} else {
-				UILabel infoLabel = new UILabel(this, ChatColor.RED + "An error occurred, please try again later");
-				infoLabel.setAnchor(Anchor.CENTER | Anchor.TOP);
-				infoLabel.setPosition(0, getPaddedY(titleLabel));
-				this.addToScreen(infoLabel);
+				// Civilization found, load info screen
+				new CivInfoScreen(player.getCivilization()).display();
 			}
-		}));
+		}), (error) -> {
+			UILabel infoLabel = new UILabel(this, ChatColor.RED + "An error occurred, please try again later");
+			infoLabel.setAnchor(Anchor.CENTER | Anchor.TOP);
+			infoLabel.setPosition(0, getPaddedY(titleLabel));
+			this.addToScreen(infoLabel);
+		});
 	}
 
 	@Subscribe

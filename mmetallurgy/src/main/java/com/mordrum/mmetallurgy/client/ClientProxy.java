@@ -1,5 +1,6 @@
 package com.mordrum.mmetallurgy.client;
 
+import com.mordrum.mmetallurgy.MetalRegistrationHandler;
 import com.mordrum.mmetallurgy.common.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -20,12 +21,7 @@ public class ClientProxy extends CommonProxy {
 
 		ItemModelMesher itemModelMesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 
-		this.armors.forEach((armor -> {
-			itemModelMesher.register(armor, 0, new ModelResourceLocation(armor.getRegistryName(), "inventory"));
-			ModelLoader.setCustomModelResourceLocation(armor, 0, new ModelResourceLocation(armor.getRegistryName(), "inventory"));
-		}));
-
-		this.items.forEach((item -> {
+		MetalRegistrationHandler.INSTANCE.getItemsToRegister().forEach((item -> {
 			itemModelMesher.register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 		}));

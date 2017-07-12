@@ -7,13 +7,16 @@ import net.malisis.core.util.ItemUtils
 import net.malisis.core.util.MBlockState
 import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.ItemStack
+import net.minecraft.item.crafting.Ingredient
 import net.minecraft.item.crafting.ShapedRecipes
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.util.NonNullList
 
-class CaskRecipe(val cask: Cask, ringsBlock: ItemStack, barrelBlock: ItemStack, feetBlock: ItemStack) : ShapedRecipes(3, 3, arrayOf(
-        ringsBlock,         barrelBlock, ringsBlock,
-        ringsBlock,         barrelBlock, ringsBlock,
-        ItemStack.EMPTY,    feetBlock,   ItemStack.EMPTY
+
+class CaskRecipe(val cask: Cask, ringsBlock: ItemStack, barrelBlock: ItemStack, feetBlock: ItemStack) : ShapedRecipes("mordrum", 3, 3, NonNullList.from(
+        Ingredient.fromStacks(ringsBlock),         Ingredient.fromStacks(barrelBlock), Ingredient.fromStacks(ringsBlock),
+        Ingredient.fromStacks(ringsBlock),         Ingredient.fromStacks(barrelBlock), Ingredient.fromStacks(ringsBlock),
+        Ingredient.fromStacks(ItemStack.EMPTY),    Ingredient.fromStacks(feetBlock),   Ingredient.fromStacks(ItemStack.EMPTY)
 ), ItemStack(cask)) {
 
     override fun getCraftingResult(inv: InventoryCrafting): ItemStack {

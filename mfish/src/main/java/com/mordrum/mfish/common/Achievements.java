@@ -1,5 +1,6 @@
 package com.mordrum.mfish.common;
 
+/*FIXME advancements
 import net.minecraft.init.Items;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
@@ -7,6 +8,7 @@ import net.minecraftforge.common.AchievementPage;
 import java.util.List;
 
 import static com.mordrum.mfish.MFish.MOD_ID;
+
 
 public class Achievements {
 	// related to the weight of a caught fish
@@ -64,3 +66,4 @@ public class Achievements {
 		achievements.add(FISHOLOGIST);
 	}
 }
+*/

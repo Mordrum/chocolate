@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
 import net.minecraftforge.fml.relauncher.Side
 import java.util.*
 import java.util.function.BiConsumer
+import java.util.function.Consumer
 import kotlin.reflect.KClass
 
 open class CommonProxy {
@@ -68,15 +69,13 @@ open class CommonProxy {
         fun populateCaches() {
             civilizationMap.clear()
             chunkCache.clear()
-            ClientAPIHelper.getCivilizations(Maps.newHashMapWithExpectedSize<String, Any>(0), listOf("chunks"), BiConsumer { err, civilizations ->
-                if (err == null) {
-                    for (civilization in civilizations) {
-                        civilizationMap.put(civilization.id, civilization)
-                        syncCivilizationChunks(civilization)
-                    }
-                } else {
-                    //TODO more graceful error handling, should probably crash here
+            ClientAPIHelper.getCivilizations(Maps.newHashMapWithExpectedSize<String, Any>(0), listOf("chunks"), Consumer { civilizations ->
+                for (civilization in civilizations) {
+                    civilizationMap.put(civilization.id, civilization)
+                    syncCivilizationChunks(civilization)
                 }
+            }, Consumer { error ->
+                //TODO more graceful error handling, should probably crash here
             })
         }
 
@@ -84,10 +83,12 @@ open class CommonProxy {
             val with = listOf<String>()
             if (syncChunks) with + "chunks"
 
-            ClientAPIHelper.getCivilizations(mapOf(Pair("id", civilizationId)), with, BiConsumer { err, civilizations ->
+            ClientAPIHelper.getCivilizations(mapOf(Pair("id", civilizationId)), with, Consumer { civilizations ->
                 val civilization = civilizations[0]
                 civilizationMap.put(civilization.id, civilization)
                 if (syncChunks) syncCivilizationChunks(civilization)
+            }, Consumer { error ->
+                //TODO more graceful error handling, should probably crash here
             })
         }
 

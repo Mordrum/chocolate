@@ -10,18 +10,19 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
 import java.util.function.BiConsumer
+import java.util.function.Consumer
 
 object ServerAPIHelper: APIHelper() {
-    fun invitePlayerToCivilization(playerToInvite: String, playerInviting: UUID, consumer: BiConsumer<Exception?, String>) {
+    fun invitePlayerToCivilization(playerToInvite: String, playerInviting: UUID, successHandler: Consumer<String>, errorHandler: Consumer<Exception>) {
         Unirest.get(MCore.API_URL + "/civilizations")
-                .asJsonAsync(object : SafeCallback<String>(consumer) {
+                .asJsonAsync(object : SafeCallback<String>(errorHandler) {
                     override fun onComplete(body: JsonNode) {
-                        consumer.accept(null, body.`object`.getString("message"))
+                        successHandler.accept(body.`object`.getString("message"))
                     }
                 })
     }
 
-    fun createCivilization(name: String, banner: String, player: EntityPlayer, consumer: BiConsumer<Exception?, Civilization>) {
+    fun createCivilization(name: String, banner: String, player: EntityPlayer, successHandler: Consumer<Civilization>, errorHandler: Consumer<Exception>) {
         val body = JSONObject()
                 .put("player", player.uniqueID)
                 .put("name", name)
@@ -31,45 +32,45 @@ object ServerAPIHelper: APIHelper() {
 
         Unirest.post(MCore.API_URL + "/civilizations")
                 .body(body)
-                .asJsonAsync(object : SafeCallback<Civilization>(consumer) {
+                .asJsonAsync(object : SafeCallback<Civilization>(errorHandler) {
                     override fun onComplete(body: JsonNode) {
                         if (this.response.status == 200) {
                             val civilization = gson.fromJson(body.toString(), Civilization::class.java)
-                            consumer.accept(null, civilization)
+                            successHandler.accept(civilization)
                         } else {
-                            consumer.accept(Exception(body.`object`.getString("message")), null)
+                            errorHandler.accept(Exception(body.`object`.getString("message")))
                         }
                     }
                 })
     }
 
-    fun addPlayerToCivilization(player: UUID, civilizationId: Long, consumer: BiConsumer<Exception?, Civilization>) {
+    fun addPlayerToCivilization(player: UUID, civilizationId: Long, successHandler: Consumer<Civilization>, errorHandler: Consumer<Exception>) {
         val body = JSONObject()
                 .put("uuid", player)
         Unirest.patch(MCore.API_URL  + "/civilizations/" + civilizationId + "/addplayer")
                 .body(body)
-                .asJsonAsync(object : SafeCallback<Civilization>(consumer) {
+                .asJsonAsync(object : SafeCallback<Civilization>(errorHandler) {
                     override fun onComplete(body: JsonNode) {
                         if (this.response.status == 200) {
                             val civilization = gson.fromJson(body.toString(), Civilization::class.java)
-                            consumer.accept(null, civilization)
+                            successHandler.accept(civilization)
                         } else {
-                            consumer.accept(Exception(body.`object`.getString("message")), null)
+                            errorHandler.accept(Exception(body.`object`.getString("message")))
                         }
                     }
                 })
     }
 
-    fun updateCivilization(civilization: Civilization, consumer: BiConsumer<Exception?, Civilization>) {
+    fun updateCivilization(civilization: Civilization, successHandler: Consumer<Civilization>, errorHandler: Consumer<Exception>) {
         val body = JSONObject(gson.toJson(civilization))
         Unirest.patch(MCore.API_URL  + "/civilizations/" + civilization.id)
                 .body(body)
-                .asJsonAsync(object : SafeCallback<Civilization>(consumer) {
+                .asJsonAsync(object : SafeCallback<Civilization>(errorHandler) {
                     override fun onComplete(body: JsonNode) {
                         if (this.response.status == 200) {
-                            consumer.accept(null, gson.fromJson(body.toString(), Civilization::class.java))
+                            successHandler.accept(gson.fromJson(body.toString(), Civilization::class.java))
                         } else {
-                            consumer.accept(Exception(body.`object`.getString("message")), null)
+                            errorHandler.accept(Exception(body.`object`.getString("message")))
                         }
                     }
                 })
