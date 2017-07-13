@@ -1,4 +1,4 @@
-package com.mordrum.mfish.common;
+package com.mordrum.mfish.common
 
 /*FIXME advancements
 import net.minecraft.init.Items;
