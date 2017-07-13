@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.ItemModelMesher
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.item.Item
 import net.minecraftforge.client.model.ModelLoader
+import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.common.FMLCommonHandler
 import net.minecraftforge.fml.common.Mod
@@ -20,7 +21,6 @@ import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 
-@Mod.EventBusSubscriber(modid = MFish.MOD_ID)
 open class CommonProxy {
     open fun onPreInit(event: FMLPreInitializationEvent) {
         println("Pre Init")
@@ -74,6 +74,10 @@ open class CommonProxy {
         lateinit var config: Config
         var rawItem = ItemFish(false)
         var cookedItem = ItemFish(true)
+
+        init {
+            MinecraftForge.EVENT_BUS.register(this)
+        }
 
         @SubscribeEvent
         fun registerItems(event: RegistryEvent.Register<Item>) {
