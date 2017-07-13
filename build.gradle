@@ -24,6 +24,10 @@ buildscript {
     }
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0.1' //version required
+}
+
 allprojects {
     apply plugin: "kotlin"
     apply plugin: 'com.github.johnrengelman.shadow'
