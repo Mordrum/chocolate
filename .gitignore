@@ -124,5 +124,8 @@ run/.idea
 !run/mods/*
 run/config/biomesoplenty/biomes/defaults/
 
+# Expliclity add libs folder, even though it contains jar files
+!/libs/*
+
 # Ignore the MC assets that are extracted
 assets/
