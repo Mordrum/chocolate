@@ -18,6 +18,6 @@ public class ColorizerGrassMixin {
         int j = (int) ((1.0D - humidity) * 255.0D);
         int k = j << 8 | i;
 
-        return Season.getCurrentSeason().getGrassColor(k > grassBuffer.length ? -65281 : grassBuffer[k]);
+        return Season.Companion.getCurrentSeason().getGrassColor(k > grassBuffer.length ? -65281 : grassBuffer[k]);
     }
 }

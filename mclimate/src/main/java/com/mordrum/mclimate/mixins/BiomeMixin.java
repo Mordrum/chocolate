@@ -17,7 +17,7 @@ public abstract class BiomeMixin {
 
     @Inject(method = "getTemperature", at = @At("HEAD"), cancellable = true)
     public void getTemperature(CallbackInfoReturnable<Float> returnable) {
-        returnable.setReturnValue(Season.getCurrentSeason().getModifiedTemperature(temperature));
+        returnable.setReturnValue(Season.Companion.getCurrentSeason().getModifiedTemperature(temperature));
     }
 
     @Inject(method = "isSnowyBiome", at = @At("HEAD"), cancellable = true)
@@ -40,7 +40,7 @@ public abstract class BiomeMixin {
 
     // Add this method so canRain can call it
     private boolean canSnow() {
-        return (Season.getCurrentSeason() == Season.WINTER && this.temperature <= 0.8f);
+        return (Season.Companion.getCurrentSeason() == Season.WINTER && this.temperature <= 0.8f);
     }
 }
 
