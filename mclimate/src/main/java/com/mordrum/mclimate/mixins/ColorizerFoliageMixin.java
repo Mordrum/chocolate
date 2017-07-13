@@ -18,7 +18,7 @@ public class ColorizerFoliageMixin {
         humidity = humidity * temperature;
         int i = (int) ((1.0D - temperature) * 255.0D);
         int j = (int) ((1.0D - humidity) * 255.0D);
-        return Season.getCurrentSeason().getFoliageColor(foliageBuffer[j << 8 | i]);
+        return Season.Companion.getCurrentSeason().getFoliageColor(foliageBuffer[j << 8 | i]);
     }
 
     @Overwrite
@@ -28,15 +28,15 @@ public class ColorizerFoliageMixin {
 
     @Overwrite
     public static int getFoliageColorBirch() {
-        if (Season.getCurrentSeason() == Season.AUTUMN) {
+        if (Season.Companion.getCurrentSeason() == Season.AUTUMN) {
             return new Color(255, 250, 0).getRGB();
         } else {
-            return Season.getCurrentSeason().getFoliageColor(8431445);
+            return Season.Companion.getCurrentSeason().getFoliageColor(8431445);
         }
     }
 
     @Overwrite
     public static int getFoliageColorBasic() {
-        return Season.getCurrentSeason().getFoliageColor(4764952);
+        return Season.Companion.getCurrentSeason().getFoliageColor(4764952);
     }
 }

@@ -4,14 +4,13 @@ import com.mordrum.mclimate.common.Season;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldProviderSurface;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(WorldProviderSurface.class)
 public abstract class WorldProviderSurfaceMixin extends WorldProvider {
 
     @Override
     public float calculateCelestialAngle(long time, float partial) {
-        Season currentSeason = Season.getCurrentSeason();
+        Season currentSeason = Season.Companion.getCurrentSeason();
         int dayDuration = 12000;
         int nightDuration = 12000;
         if (currentSeason == Season.SUMMER) {

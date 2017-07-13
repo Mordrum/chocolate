@@ -42,7 +42,7 @@ public abstract class WorldServerMixin extends World implements IThreadListener 
 
         for (Iterator<Chunk> iterator = getPersistentChunkIterable(this.playerChunkMap.getChunkIterator()); iterator.hasNext(); this.profiler.endSection()) {
             this.profiler.startSection("getChunk");
-            Chunk chunk = (Chunk) iterator.next();
+            Chunk chunk = iterator.next();
             int j = chunk.x * 16;
             int k = chunk.z * 16;
             this.profiler.endStartSection("checkNextLight");
