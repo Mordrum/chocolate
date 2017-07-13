@@ -7,14 +7,13 @@ import com.mordrum.mcore.common.util.SafeCallback
 import com.mordrum.mfish.common.Fish
 import net.minecraft.entity.player.EntityPlayer
 import org.json.JSONObject
-import java.util.function.BiConsumer
 import java.util.function.Consumer
 
 object APIHelper {
     fun checkHighscore(player: EntityPlayer, fish: Fish, weight: Double, successHandler: Consumer<Boolean>, errorHandler: Consumer<Exception>) {
         if (player.entityWorld.isRemote) return
 
-        val body = JSONObject()
+        val data = JSONObject()
                 .put("uuid", player.uniqueID)
                 .put("fish", fish.metadata)
                 .put("weight", weight)
@@ -22,7 +21,7 @@ object APIHelper {
         Unirest.post(MCore.API_URL + "/fishing")
                 .header("accept", "application/json")
                 .header("Content-Type", "application/json")
-                .body(body)
+                .body(data)
                 .asJsonAsync(object: SafeCallback<Boolean>(errorHandler) {
                     override fun onComplete(body: JsonNode) {
                         successHandler.accept(response.body.`object`.getBoolean("is_highscore"))
