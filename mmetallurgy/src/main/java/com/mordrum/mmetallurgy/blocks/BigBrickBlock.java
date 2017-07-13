@@ -17,7 +17,6 @@ public class BigBrickBlock extends MalisisBlock {
         this.setName(MMetallurgy.MOD_ID + "." + metal + ".brick.big");
         this.setSoundType(SoundType.METAL);
         this.setHarvestLevel("pickaxe", 1);
-        this.setUnlocalizedName(this.name);
         this.setHardness(1.0f); // Time to mine
         this.setResistance(4.0f); // Explosion resistance
         this.setTexture(MMetallurgy.MOD_ID + ":blocks/bricks/" + metal + "_brick big bricks");

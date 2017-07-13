@@ -1,14 +1,8 @@
 package com.mordrum.mmetallurgy.items;
 
 import com.mordrum.mmetallurgy.MMetallurgy;
-import net.malisis.core.util.replacement.ShapedRecipesHandler;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class Armor extends ItemArmor {
 	private final String[][] recipePatterns = new String[][] {{"XXX", "X X"}, {"X X", "XXX", "XXX"}, {"XXX", "X X", "X X"}, {"X X", "X X"}};

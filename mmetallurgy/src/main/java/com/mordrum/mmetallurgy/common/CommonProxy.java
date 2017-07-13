@@ -156,7 +156,7 @@ public class CommonProxy {
 							// Register blocks here
 							SolidBlock solidBlock = new SolidBlock(name);
 							solidBlock.register();
-							GameRegistry.addShapelessRecipe(new ResourceLocation(MMetallurgy.MOD_ID, solidBlock.getName()), null, new ItemStack(Item.getItemFromBlock
+							GameRegistry.addShapelessRecipe(solidBlock.getName(), null, new ItemStack(Item.getItemFromBlock
 									(solidBlock)), ingotIngredient, ingotIngredient, ingotIngredient, ingotIngredient, ingotIngredient, ingotIngredient, ingotIngredient, ingotIngredient, ingotIngredient);
 							GameRegistry.addShapelessRecipe(new ResourceLocation(MMetallurgy.MOD_ID, solidBlock.getName() + "_breakdown"), null, new ItemStack
 											(ingot, 9),
@@ -164,12 +164,12 @@ public class CommonProxy {
 											(Item.getItemFromBlock(solidBlock)));
 							BigBrickBlock bigBrickBlock = new BigBrickBlock(name);
 							bigBrickBlock.register();
-							GameRegistry.addShapelessRecipe(new ResourceLocation(MMetallurgy.MOD_ID, bigBrickBlock.getName()), null, new ItemStack(Item
+							GameRegistry.addShapelessRecipe(bigBrickBlock.getName(), null, new ItemStack(Item
 									.getItemFromBlock
 									(bigBrickBlock), 4), ingotIngredient, ingotIngredient, ingotIngredient, ingotIngredient);
 							SmallBrickBlock smallBrickBlock = new SmallBrickBlock(name);
 							smallBrickBlock.register();
-							GameRegistry.addShapelessRecipe(new ResourceLocation(MMetallurgy.MOD_ID, smallBrickBlock.getName()), null, new ItemStack(Item
+							GameRegistry.addShapelessRecipe(smallBrickBlock.getName(), null, new ItemStack(Item
 									.getItemFromBlock
 									(smallBrickBlock), 3), ingotIngredient, ingotIngredient, ingotIngredient);
 						}
@@ -189,7 +189,7 @@ public class CommonProxy {
 				components.add(Ingredient.fromItem(item));
 			}
 
-			GameRegistry.addShapelessRecipe(new ResourceLocation(MMetallurgy.MOD_ID, ingot.getName()), null, new ItemStack(ingot, components.size()), components
+			GameRegistry.addShapelessRecipe(ingot.getName(), null, new ItemStack(ingot, components.size()), components
 					.toArray(new Ingredient[jsonElements.size()]));
 		}
 	}
